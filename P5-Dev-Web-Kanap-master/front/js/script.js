@@ -32,6 +32,7 @@ const imageSrc = document.createAttribute(`src`);
 imageSrc.value = `http://localhost:3000/images/kanap01.jpeg`;
 image.setAttributeNode(imageSrc);
 
+
 const subtitle = document.createElement(`h3`);
 const subtitleClass = document.createAttribute(`class`);
 subtitleClass.value = `productName`;
@@ -43,7 +44,7 @@ const paragrapheClass = document.createAttribute(`class`);
 paragrapheClass.value = `productDescription`
 const paragrapheText = document.createTextNode(`Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.`)
 paragraphe.setAttributeNode(paragrapheClass);
-
+//présentation
 items.appendChild(a);
 a.append(article);   
 article.append(image,subtitle,paragraphe);
@@ -52,10 +53,24 @@ subtitle.append(subtitletext);
 
 
 
+for(let i = 0;i< outputData.length; i += 1){
+ console.log([i]);
+}
 
+//outputData.forEach((value,index) => {
+//   console.log(`value: ${value},index: ${index}`);
+//});
 
+   
+ 
 
 }
+
+
+
+
+
+
 //permet d'appeler la fonction
 outputDisplay();
 
