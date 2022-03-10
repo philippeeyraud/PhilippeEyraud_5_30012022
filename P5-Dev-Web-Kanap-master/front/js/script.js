@@ -28,38 +28,15 @@ const outputDisplay = async () => {
    aHref.value = `http://localhost:3000/api/products`;
    a.setAttributeNode(aHref);
 
-   const article = document.createElement(`article`);
-
-   const image = document.createElement(`img`);
-   const imageSrc = document.createAttribute(`src`);
-   imageSrc.value = `http://localhost:3000/images/kanap01.jpeg`;
-   image.setAttributeNode(imageSrc);
 
 
-   const subtitle = document.createElement(`h3`);
-   const subtitleClass = document.createAttribute(`class`);
-   subtitleClass.value = `productName`;
-   const subtitletext = document.createTextNode(`Kanap name1`)
-   subtitle.setAttributeNode(subtitleClass);
-
-   const paragraphe = document.createElement(`p`);
-   const paragrapheClass = document.createAttribute(`class`);
-   paragrapheClass.value = `productDescription`
-   const paragrapheText = document.createTextNode(`Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.`)
-   paragraphe.setAttributeNode(paragrapheClass);
-   //présentation
-   items.appendChild(a);
-   a.append(article);
-   article.append(image, subtitle, paragraphe);
-   paragraphe.append(paragrapheText);
-   subtitle.append(subtitletext);
 
 
 
 
    for (let i = 0; i < outputData.length; i += 1) {
       const article = document.createElement(`article`);
-console.log(outputData[i].name);
+      console.log(outputData[i].name);
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = outputData[i].imageUrl;
@@ -69,17 +46,14 @@ console.log(outputData[i].name);
       const subtitle = document.createElement(`h3`);
       const subtitleClass = document.createAttribute(`class`);
       subtitleClass.value = `productName`;
-      const subtitletext = document.createTextNode(`Kanap name1`)
+      const subtitletext = outputData[i].name;
       subtitle.setAttributeNode(subtitleClass);
 
       const paragraphe = document.createElement(`p`);
       const paragrapheClass = document.createAttribute(`class`);
       paragrapheClass.value = `productDescription`
-      const paragrapheText = document.createTextNode(`Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.`)
+      const paragrapheText = outputData[i].description;
       paragraphe.setAttributeNode(paragrapheClass);
-
-
-
 
       //présentation
       items.appendChild(a);
@@ -87,6 +61,8 @@ console.log(outputData[i].name);
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
+
+
 
    }
 
