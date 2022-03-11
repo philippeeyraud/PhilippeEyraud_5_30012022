@@ -1,3 +1,4 @@
+
 //Aller chercher des requêtes vers l'API .
 let outputData = [];
 
@@ -25,18 +26,11 @@ const outputDisplay = async () => {
    const items = document.querySelector('#items');
    const a = document.createElement(`a`);
    const aHref = document.createAttribute(`href`);
-   aHref.value = `http://localhost:3000/api/products`;
-   a.setAttributeNode(aHref);
-
-
-
-
-
-
+    a.setAttributeNode(aHref);
 
    for (let i = 0; i < outputData.length; i += 1) {
       const article = document.createElement(`article`);
-      console.log(outputData[i].name);
+      console.log(outputData[i].name); 
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = outputData[i].imageUrl;
