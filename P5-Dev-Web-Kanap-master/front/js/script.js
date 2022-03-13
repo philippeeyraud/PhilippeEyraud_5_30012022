@@ -28,25 +28,25 @@ const outputDisplay = async () => {
    const aHref = document.createAttribute(`href`);
     a.setAttributeNode(aHref);
 
-   for (let v of outputData.length ) {
+   for (let v of outputData) {
       const article = document.createElement(`article`);
-      console.log(outputData[i].name); 
+      
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
-      imageSrc.value = outputData[i].imageUrl;
+      imageSrc.value = v.imageUrl;
       image.setAttributeNode(imageSrc);
 
 
       const subtitle = document.createElement(`h3`);
       const subtitleClass = document.createAttribute(`class`);
-      subtitleClass.value = `productName`;
-      const subtitletext = outputData[i].name;
+      subtitleClass.value = `Name`;
+      const subtitletext = v.name;
       subtitle.setAttributeNode(subtitleClass);
 
       const paragraphe = document.createElement(`p`);
       const paragrapheClass = document.createAttribute(`class`);
       paragrapheClass.value = `productDescription`
-      const paragrapheText = outputData[i].description;
+      const paragrapheText = v.description;
       paragraphe.setAttributeNode(paragrapheClass);
 
       //présentation
@@ -54,8 +54,7 @@ const outputDisplay = async () => {
       a.append(article);
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
-      subtitle.append(subtitletext);
-   }
+      subtitle.append(subtitletext);}
 
 
 
