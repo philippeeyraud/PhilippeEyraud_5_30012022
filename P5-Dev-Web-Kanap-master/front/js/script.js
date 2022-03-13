@@ -28,7 +28,7 @@ const outputDisplay = async () => {
    const aHref = document.createAttribute(`href`);
     a.setAttributeNode(aHref);
 
-   for (let i = 0; i < outputData.length; i += 1) {
+   for (let v of outputData.length ) {
       const article = document.createElement(`article`);
       console.log(outputData[i].name); 
       const image = document.createElement(`img`);
@@ -55,9 +55,6 @@ const outputDisplay = async () => {
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
-
-
-
    }
 
 
