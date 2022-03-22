@@ -3,8 +3,8 @@
 let outputData = [];
 
 const fetchOutput = async () => {
-   await fetch("http://localhost:3000/api/products")
-      //attendre la  recherche de la requête.
+   await fetch("http://localhost:3000/api/products/")
+      //attendre la  recherche de la requête.   
 
       //création d'une promise , on traite la réponse avec json.
       .then((Response) => Response.json())
@@ -24,17 +24,19 @@ const outputDisplay = async () => {
    // for (let v of outputData ) {document.getElementById("items").innerHTML+=`<article><img class="items" src="${v.imageUrl}" alt="image items du site" /></article>`;}
 
    const items = document.querySelector('#items');
-   const a = document.createElement(`a`);
-   const aHref = document.createAttribute(`href`);
-    a.setAttributeNode(aHref);
+
 
    for (let v of outputData) {
+      const a = document.createElement(`a`);
+      const aHref = document.createAttribute(`href`);
+      a.setAttributeNode(aHref);
       const article = document.createElement(`article`);
-      
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = v.imageUrl;
       image.setAttributeNode(imageSrc);
+
+
 
 
       const subtitle = document.createElement(`h3`);
@@ -48,13 +50,18 @@ const outputDisplay = async () => {
       paragrapheClass.value = `productDescription`
       const paragrapheText = v.description;
       paragraphe.setAttributeNode(paragrapheClass);
-
+      
       //présentation
       items.appendChild(a);
       a.append(article);
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
-      subtitle.append(subtitletext);}
+      subtitle.append(subtitletext);
+
+ 
+   }
+
+
 
 
 
