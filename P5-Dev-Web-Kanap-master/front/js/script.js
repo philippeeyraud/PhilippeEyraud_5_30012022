@@ -25,16 +25,23 @@ const outputDisplay = async () => {
 
    const items = document.querySelector('#items');
  
+ 
    for (let v of outputData) {
       
-      let _id = []
-       _id[v] = _id.outputData;
-
+      document.querySelector(`#_42`).value;
+      preventDefault();}
+      let apicall = function (outputData){
+         let url ="http://localhost:3000/api/products/"
+      }
+      let appicall = function(article){
+        let url ="http://localhost:3000/api/products/?id=107fb5b75607497b96722bda5b504926"
+      };
       const a = document.createElement(`a`);
       const aHref = document.createAttribute(`href`);
       a.setAttributeNode(aHref);
 
       const article = document.createElement(`article`);
+      
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = v.imageUrl;
