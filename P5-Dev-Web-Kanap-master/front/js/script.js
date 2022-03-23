@@ -33,7 +33,7 @@ const outputDisplay = async () => {
       let apicall = function (outputData){
          let url ="http://localhost:3000/api/products/"
       }
-      let appicall = function(article){
+      let apicall = function(article){
         let url ="http://localhost:3000/api/products/?id=107fb5b75607497b96722bda5b504926"
       };
       const a = document.createElement(`a`);
@@ -66,7 +66,8 @@ const outputDisplay = async () => {
       paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
    }
-}
+
+   
 //permet d'appeler la fonction
 outputDisplay();
 
