@@ -48,20 +48,24 @@ const outputDisplay = async () => {
       const paragrapheText = v.description;
       paragraphe.setAttributeNode(paragrapheClass);
 
+      //récupération du lien
+      const apicalls = document.querySelectorAll("a");
+      console.log(apicalls);
+      const apicallsArray = Array.from(apicalls);
+      apicallsArray.map(apicall => apicall.addEventListener("click", function (event) {
+         event.preventDefault();
+         location.href = "http://localhost:3000/api/products/107fb5b75607497b96722bda5b504926";
+      }));
+
+
+
       //présentation
       items.appendChild(a);
       a.append(article);
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
-      //récupération du lien
-      const liens = document.querySelectorAll("a");
-      console.log(liens);
-      const liensArray = Array.from(liens);
-      liensArray.map(lien => lien.addEventListener("click", function (event) {
-         event.preventDefault();
-         location.href = "http://localhost:3000/api/products/107fb5b75607497b96722bda5b504926";
-      }));
+
 
 
    }
