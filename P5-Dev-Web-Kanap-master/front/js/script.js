@@ -24,24 +24,13 @@ const outputDisplay = async () => {
    // for (let v of outputData ) {document.getElementById("items").innerHTML+=`<article><img class="items" src="${v.imageUrl}" alt="image items du site" /></article>`;}
 
    const items = document.querySelector('#items');
- 
- 
+
+
    for (let v of outputData) {
-      
-      document.querySelector(`#_42`).value;
-      preventDefault();}
-      let apicall = function (outputData){
-         let url ="http://localhost:3000/api/products/"
-      }
-      let apicall = function(article){
-        let url ="http://localhost:3000/api/products/?id=107fb5b75607497b96722bda5b504926"
-      };
       const a = document.createElement(`a`);
       const aHref = document.createAttribute(`href`);
       a.setAttributeNode(aHref);
-
       const article = document.createElement(`article`);
-      
       const image = document.createElement(`img`);
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = v.imageUrl;
@@ -65,13 +54,34 @@ const outputDisplay = async () => {
       article.append(image, subtitle, paragraphe);
       paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
+      //récupération du lien
+      const liens = document.querySelectorAll("a");
+      console.log(liens);
+      const liensArray = Array.from(liens);
+      liensArray.map(lien => lien.addEventListener("click", function (event) {
+         event.preventDefault();
+         location.href = "http://localhost:3000/api/products/107fb5b75607497b96722bda5b504926";
+      }));
+
+
    }
 
-   
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
 //permet d'appeler la fonction
 outputDisplay();
-
-
 
 
 
