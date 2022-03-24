@@ -49,12 +49,13 @@ const outputDisplay = async () => {
       paragraphe.setAttributeNode(paragrapheClass);
 
       //récupération du lien
+      let _id = []
       const apicalls = document.querySelectorAll("a");
       console.log(apicalls);
       const apicallsArray = Array.from(apicalls);
       apicallsArray.map(apicall => apicall.addEventListener("click", function (event) {
          event.preventDefault();
-         location.href = "http://localhost:3000/api/products/107fb5b75607497b96722bda5b504926";
+         location.href = "http://localhost:3000/api/products/_id=107fb5b75607497b96722bda5b504926";
       }));
 
 
