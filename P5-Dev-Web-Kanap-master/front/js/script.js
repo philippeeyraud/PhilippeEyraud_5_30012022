@@ -23,7 +23,6 @@ const outputDisplay = async () => {
    //on cherche la source dans le back-end.
    // for (let v of outputData ) {document.getElementById("items").innerHTML+=`<article><img class="items" src="${v.imageUrl}" alt="image items du site" /></article>`;}
 
-   const items = document.querySelector('#items');
 
 
    for (let v of outputData) {
@@ -85,7 +84,3 @@ const outputDisplay = async () => {
 
 //permet d'appeler la fonction
 outputDisplay();
-
-
-
-
