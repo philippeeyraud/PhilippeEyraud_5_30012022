@@ -33,11 +33,11 @@ const outputDisplay = async () => {
       const imageSrc = document.createAttribute(`src`);
       imageSrc.value = v.imageUrl;
       image.setAttributeNode(imageSrc);
-      image.setAttribute ('alt',v.altTxt )
+      
 
       const subtitle = document.createElement(`h3`);
       const subtitleClass = document.createAttribute(`class`);
-      subtitleClass.value = `Name`;
+      subtitleClass.value = `Name`; 
       const subtitletext = v.name;
       subtitle.setAttributeNode(subtitleClass);
 
@@ -61,7 +61,7 @@ const outputDisplay = async () => {
       items.appendChild(a);
       a.append(article);
       article.append(image, subtitle, paragraphe);
-      paragraphe.append(paragrapheText);
+     paragraphe.append(paragrapheText);
       subtitle.append(subtitletext);
 
 
