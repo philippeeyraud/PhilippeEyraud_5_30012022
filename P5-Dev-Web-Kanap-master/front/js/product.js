@@ -24,16 +24,18 @@ fetch(url).then((response) =>
 
         const image = document.createElement(`img`);
         image.setAttribute(`src`, imageUrl);
-       const alt =document.createElement(`alt`);
-      
+        const alt =document.createElement(`alt`);
+        
+        let option = document.createElement(`option`)
+        const selectname = document.getElementById(`colors`)
 
         let color = [];
         for (let i = 0; i < 3; i++) {
             color = color+ i;
 
-            const choisirUneCouleur = document.createElement(`selectname`);
-            document.getElementById(`colors`).textContent = colors;
-            console.log(choisirUneCouleur);
+           
+          
+
 
 
         }
