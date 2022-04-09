@@ -43,30 +43,12 @@ fetch(url).then((response) =>
             if (quantityElement.value < 1 || quantityElement.value > 100) {
                 alert("Nombre d'article() (1-100)");
 
-            }
+        }
 
         });
 
         const displayimg = document.querySelector(".item__img");
         displayimg.appendChild(image);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -76,7 +58,7 @@ fetch(url).then((response) =>
 
 
 
-    ));
+));
 
 
 
