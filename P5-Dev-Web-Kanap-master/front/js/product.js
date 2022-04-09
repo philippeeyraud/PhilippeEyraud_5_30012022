@@ -11,62 +11,45 @@ let url = `http://localhost:3000/api/products/${id}`;
 fetch(url).then((response) =>
     response.json().then((product) => {
         console.log(product);
-        const { name, price, imageUrl, description, colors } = product;
-
-        document.getElementById(`title`).textContent = name;
-        document.getElementById(`price`).textContent = price;
-        document.getElementById(`description`).textContent = description;
-
-
+        document.getElementById(`title`).textContent = product.name;
+        document.getElementById(`price`).textContent = product.price;
+        document.getElementById(`description`).textContent = product.description;
         const image = document.createElement(`img`);
-        image.setAttribute(`src`, imageUrl);
-        const alt = document.createElement(`alt`);
+        image.setAttribute(`src`, product.imageUrl);
+        image.setAttribute(`alt`, product.altTxt);
+        const productColor = document.getElementById(`colors`)
 
-        const selectname = document.getElementsByTagName(`color-select`)
-        const option = document.createElement(`option`);
-        const quantityElmement = document.getElementById(`quantity`);
-        const  productColor = document.getElementById(`colors`)
-       const color = product.value;
-       
-       for (let i = 0; i <colors.length; i += 1) {
-        option.innerHTML = colors;
-          option.value = [colors.i];
-          console.log(colors);
-         productColor.appendChild(option);
-
-
-
+        for (let i = 0; i < product.colors.length; i += 1) {
+            const option = document.createElement(`option`);
+            option.innerText = product.colors[i];
+            option.value = product.colors[i];
+            console.log(product.colors[i]);
+            productColor.appendChild(option);
         }
 
-        if (quantityElmement.values < 1 || quantityElmement.value > 100) {
-            alert("Nombre d'article() (1-100)");
-        }
+        const button = document.getElementById(`addToCart`);
 
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert(" test");
 
+            //si la couleur n'est pas selectionné
+            if(productColor.value ==``) {
+                alert("choisissez une couleur");
+            }
 
+            const quantityElement = document.getElementById(`quantity`);
+            if (quantityElement.value < 1 || quantityElement.value > 100) {
+                alert("Nombre d'article() (1-100)");
 
+            }
 
-
-
-
-        // button.addEventListener("click", function (event) {
-        //    event.preventDefault();
-        //   event.stopPropagation();
-
-        //  if (button == `option.value`) {
-        //  alert(" ");
-        //    } 
-
-
-
-
-
-
-
+        });
 
         const displayimg = document.querySelector(".item__img");
         displayimg.appendChild(image);
-        image.append(alt);
+
 
 
 
