@@ -38,7 +38,7 @@ fetch(url).then((response) =>
         button.addEventListener("click", function (event) {
             event.preventDefault();
             event.stopPropagation();
-            alert(" test");
+            alert(" ajouter au panier");
 
             //si la couleur n'est pas selectionné
             if (productColor.value == ``) {
@@ -50,52 +50,36 @@ fetch(url).then((response) =>
                 alert("Nombre d'article() (1-100)");
             }
 
-        });
-        const getCard = () => {
-            const product = {
-                id: productId,
-                color: productColor.value.value,
-                quantity: quantityElement.value,
-                name: product.name,
-                price: product.price,
-                description: product.description,
-                image: product.imageUrl,
-                altTxt: product.altTxt,
-            };
-        
-            //on recupere un item
-             function getCart() {
-            let cart = localStorage.getItem("cart");
-            if (cart == null) {
-                return [];
-            }
             else {
-                return JSON.parse(cart);
+                (productId);
             }
-             }
+
+       
+            //on recupere un item
+            function getCart() {
+                let cart = localStorage.getItem("cart");
+                if (cart == null) {
+                    return [];
+                }
+                else {
+                    return JSON.parse(cart);
+                }
+            }
             //récupérer le panier et ajout au panier
-             function addCart(product) {
-            let cart = getCart();
-            //Gérer une quantité, si le produit existe deja on lui ajoute une quantité sinon on l'ajoute
-            let foundProduct = cart.find(p => p.id = product.id);
-            if (foundProduct != undefined) {
-                foundProduct.quantity++;
-            } else {
-                product.quantity = 1
-                cart.push(product);
+            function addCart(product) {
+                let cart = getCart();
+                //Gérer une quantité, si le produit existe deja on lui ajoute une quantité sinon on l'ajoute
+                let foundProduct = cart.find(p => p.id = product.id);
+                if (foundProduct != undefined) {
+                    foundProduct.quantity++;
+                } else {
+                    product.quantity = 1
+                    cart.push(product);
+                }
+
+                saveCart(cart);
             }
-
-            saveCart(cart);
-            }
-
-        }
-
-
-
-
-
-
-
+        });
 
 
 
@@ -105,6 +89,12 @@ fetch(url).then((response) =>
 
 
     }
+
+
+
+
+
+
 
 
 
