@@ -43,19 +43,26 @@ fetch(url).then((response) =>
             //si la couleur n'est pas selectionné
             if (productColor.value == ``) {
                 alert("choisissez une couleur");
+                return;
+
             }
 
             const quantityElement = document.getElementById(`quantity`);
             if (quantityElement.value < 1 || quantityElement.value > 100) {
                 alert("Nombre d'article() (1-100)");
+                return;
             }
 
             else {
                 (productId);
             }
 
-       
-            //on recupere un item
+            function saveCart(cart) {
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+
+
+
             function getCart() {
                 let cart = localStorage.getItem("cart");
                 if (cart == null) {
@@ -65,20 +72,35 @@ fetch(url).then((response) =>
                     return JSON.parse(cart);
                 }
             }
-            //récupérer le panier et ajout au panier
-            function addCart(product) {
+            //  ajout au panier
+            function addCart(productCart) {
                 let cart = getCart();
                 //Gérer une quantité, si le produit existe deja on lui ajoute une quantité sinon on l'ajoute
-                let foundProduct = cart.find(p => p.id = product.id);
+
+
+                let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color);
                 if (foundProduct != undefined) {
-                    foundProduct.quantity++;
+                    let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
+
+                    foundProduct.quantity = newQuantity;
+
                 } else {
-                    product.quantity = 1
-                    cart.push(product);
+
+                    cart.push(productCart);
                 }
 
                 saveCart(cart);
             }
+            //objet product Cart
+
+            let productCartObj = {
+                id: productId,
+                quantity: quantityElement.value,
+                color: productColor.value
+            };
+
+            addCart(productCartObj);
+
         });
 
 
