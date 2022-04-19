@@ -9,12 +9,12 @@ for (let v of cart) {
         response.json().then((productObj) => {
             console.log(productObj);
          
-             const section = document.getElementById(`cart_items`);
+            const section = document.getElementById(`cart_items`);
             const article = document.getElementsByClassName(`cart__item`)
            
             const image = document.createElement(`img`);
-            image.setAttribute(`src`, cart.imageUrl);
-            image.setAttribute(`alt`, cart.altTxt);
+            image.setAttribute(`src`, productObj.imageUrl);
+            image.setAttribute(`alt`, productObj.altTxt);
         
            
 
@@ -24,11 +24,11 @@ for (let v of cart) {
 
 
 
-
+           
 
 
 
         }));
-     
-
+      
+      
 }
