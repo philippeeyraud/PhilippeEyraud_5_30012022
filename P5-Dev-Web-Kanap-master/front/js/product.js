@@ -53,15 +53,16 @@ fetch(url).then((response) =>
                 return;
             }
 
+            
             else {
                 (productId);
             }
-
+            //Stocker les données dans le localstorage
             function saveCart(cart) {
                 localStorage.setItem("cart", JSON.stringify(cart));
             }
 
-
+            //Récuperer les données du panier dans le local storage
 
             function getCart() {
                 let cart = localStorage.getItem("cart");
@@ -72,16 +73,18 @@ fetch(url).then((response) =>
                     return JSON.parse(cart);
                 }
             }
-            //  ajout au panier
+            //  ajout au panier et c'est ce produit(productCart)que je veux ajouter au panier
             function addCart(productCart) {
                 let cart = getCart();
-                //Gérer une quantité, si le produit existe deja on lui ajoute une quantité sinon on l'ajoute
 
+                //on récupère l'Id et la couleur
 
                 let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color);
                 if (foundProduct != undefined) {
+                    //Gérer une quantité, si le produit existe  on lui ajoute une quantité sous forme de nombre.
+                    //parseInt analyse une chaine de caractères et renvoie un nombre.
                     let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
-
+                    //la quantité est recalculé à chaque ajout de produit
                     foundProduct.quantity = newQuantity;
 
                 } else {
@@ -91,7 +94,7 @@ fetch(url).then((response) =>
 
                 saveCart(cart);
             }
-            //objet product Cart
+            //objet product Cart qui permet de recupérer les éléments suivant, pour pouvoir les envoyer sur le localstorage.
 
             let productCartObj = {
                 id: productId,
