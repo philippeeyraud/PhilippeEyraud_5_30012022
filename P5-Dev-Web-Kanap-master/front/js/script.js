@@ -43,7 +43,7 @@ const outputDisplay = async () => {
 
       const paragraphe = document.createElement(`p`);
       const paragrapheClass = document.createAttribute(`class`);
-      paragrapheClass.value = `productDescription`
+      paragrapheClass.value = `productDescription`;
       const paragrapheText = v.description;
       paragraphe.setAttributeNode(paragrapheClass);
 
