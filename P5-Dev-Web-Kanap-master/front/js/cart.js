@@ -12,9 +12,7 @@ for (let productCart of cart) {
     fetch(url).then((response) =>
         response.json().then((productObj) => {
             console.log(productObj);
-
-
-
+        
             const image = document.createElement(`img`);
             image.setAttribute(`src`, productObj.imageUrl);
             image.setAttribute(`alt`, productObj.altTxt);
@@ -51,18 +49,15 @@ for (let productCart of cart) {
             const titletext = productObj.name;
             title.append(titletext);
             console.log(title)
-            
-
-            
-
             displayp.appendChild(title);
-        
 
             const price = document.createElement(`p`);
             const priceClass = document.createAttribute(`class`);
             priceClass.value = `price`;
             const productPrice = productObj.price;
+            const pricetext = "  €";
             price.append(productPrice);
+            price.append(pricetext);
             displayp.appendChild(price);
 
             const quantityClass = document.createAttribute(`class`);
