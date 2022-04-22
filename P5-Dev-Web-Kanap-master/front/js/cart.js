@@ -12,7 +12,7 @@ for (let productCart of cart) {
     fetch(url).then((response) =>
         response.json().then((productObj) => {
             console.log(productObj);
-        
+
             const image = document.createElement(`img`);
             image.setAttribute(`src`, productObj.imageUrl);
             image.setAttribute(`alt`, productObj.altTxt);
@@ -36,7 +36,6 @@ for (let productCart of cart) {
 
 
             const displayp = document.querySelector(`.cart__item__content__description`);
-
             const title = document.createElement(`h2`);
             const titleClass = document.createAttribute(`class`);
             titleClass.value = `name`;
@@ -60,8 +59,8 @@ for (let productCart of cart) {
             price.append(pricetext);
             displayp.appendChild(price);
 
-            const quantityClass = document.createAttribute(`class`);
             const quantity = document.createElement(`p`);
+            const quantityClass = document.createAttribute(`class`);
             quantityClass.value = `quantity`;
             const quantitytext = "Qte :";
             quantity.append(quantitytext);
@@ -69,14 +68,20 @@ for (let productCart of cart) {
             displayp.append(quantity);
             console.log(quantity);
 
+            /*  for (let i = 0; i <deleteItem.lenght; i++)
+               deleteItem[i].addEventListener("click", function () {
+                   cart = getCart();
+           */
             const displayd = document.querySelector(`.cart__item__content__settings__delete`);
-            const deleteItem = document.getElementsByClassName(`deleteItem`);
+            const deleteItem = document.createElement(`p`);
+            const deleteItemtext = "supprimer";
+            deleteItem.append(deleteItemtext);
+            displayd.append(deleteItem);
 
-            for (let i = 0; i < deleteItem.lenght; i++)
-                deleteItem[i].addEventListener("click", function () {
-                    cart = getCart();
-                })
-
+            for (let i = 0; i <deleteItem.lenght; i++)
+            deleteItem[i].addEventListener("click", function () {
+                cart = getCart();
+            });
 
         }));
 
