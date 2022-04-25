@@ -13,27 +13,34 @@ for (let productCart of cart) {
         response.json().then((productObj) => {
             console.log(productObj);
 
+
+
+
+            /*      const cartItem = document.createElement(`div`);
+                   const cartItemContent = document.createElement(`div`);
+                   const cartItemImage = document.createElement(`div`);
+                   const cartItemContentDescription = document.createElement(`div`);
+                   const cartItemContentSettings = document.createElement(`div`);
+                   const cartItemContentSettingsQuantity = document.createElement(`div`);
+                   const cartItemContentSettingsDelete = document.createElement(`div`);
+                   cartItem.appendChild(cartItemContent);
+                   cartItem.appendChild(cartItemImage);
+                   cartItemImage.append(cartItemContent);
+                   cartItemContent.appendChild(cartItemContentDescription);
+                   cartItemContent.appendChild(cartItemContentSettings);
+                   cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
+                   cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
+       
+       */
+
+            const article = document.querySelector(".cart__item");
+
+
             const image = document.createElement(`img`);
             image.setAttribute(`src`, productObj.imageUrl);
             image.setAttribute(`alt`, productObj.altTxt);
             const displayimg = document.querySelector(".cart__item__img");
             displayimg.appendChild(image);
-
-            const cartItem = document.createElement(`div`);
-            const cartItemContent = document.createElement(`div`);
-            const cartItemImage = document.createElement(`div`);
-            const cartItemContentDescription = document.createElement(`div`);
-            const cartItemContentSettings = document.createElement(`div`);
-            const cartItemContentSettingsQuantity = document.createElement(`div`);
-            const cartItemContentSettingsDelete = document.createElement(`div`);
-            cartItem.appendChild(cartItemContent);
-            cartItem.appendChild(cartItemImage);
-            cartItemImage.append(cartItemContent);
-            cartItemContent.appendChild(cartItemContentDescription);
-            cartItemContent.appendChild(cartItemContentSettings);
-            cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
-            cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
-
 
             const displayp = document.querySelector(`.cart__item__content__description`);
             const title = document.createElement(`h2`);
@@ -44,12 +51,12 @@ for (let productCart of cart) {
             colorClass.value = `colors`;
             color.append(productColor);
             console.log(color)
-            displayp.appendChild(color)
+
             const titletext = productObj.name;
             title.append(titletext);
             console.log(title)
             displayp.appendChild(title);
-
+            displayp.appendChild(color)
             const price = document.createElement(`p`);
             const priceClass = document.createAttribute(`class`);
             priceClass.value = `price`;
@@ -68,20 +75,42 @@ for (let productCart of cart) {
             displayp.append(quantity);
             console.log(quantity);
 
-            /*  for (let i = 0; i <deleteItem.lenght; i++)
-               deleteItem[i].addEventListener("click", function () {
-                   cart = getCart();
-           */
+
             const displayd = document.querySelector(`.cart__item__content__settings__delete`);
             const deleteItem = document.createElement(`p`);
-            const deleteItemtext = "supprimer";
+            const deleteItemClass =document.createAttribute(`class`);
+            deleteItemClass.value = `deleteItem`;
+            const deleteItemtext = "delete";
             deleteItem.append(deleteItemtext);
             displayd.append(deleteItem);
 
-            for (let i = 0; i <deleteItem.lenght; i++)
-            deleteItem[i].addEventListener("click", function () {
-                cart = getCart();
-            });
+            function removeFromCart(productCart) {
+                for (let i = 0; i < deleteItem.lenght; i++)
+               
+                  deleteItem[i].addEventListener("click", function () {
+                        function removeFromCart(productCart) {
+                            cart = getCart();
+                            cart = cart.filter(p => p.id != productCart.id);
+                            saveCart(cart);
+                            console.log(deleteItem)
+                        }
+
+
+                    });
+
+
+            }
+         
+                
+
+
+
+
+
+
+
+
+
 
         }));
 
