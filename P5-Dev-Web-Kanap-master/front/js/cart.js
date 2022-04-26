@@ -32,11 +32,14 @@ for (let productCart of cart) {
                    cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
        
             */
-          
-            
+            const cart = []
+            cart.sort(Array)
+            console.log(cart)
+
+
             const article = document.createElement(`article`);
-            article.setAttribute(`data-id`,productCart.id);
-            article.setAttribute(`data-color`,productCart.color);
+            article.setAttribute(`data-id`, productCart.id);
+            article.setAttribute(`data-color`, productCart.color);
             const displayarticle = document.querySelector(`.cart__item`)
             displayarticle.append(article);
 
