@@ -31,9 +31,14 @@ for (let productCart of cart) {
                    cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
                    cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
        
-       */
-
-            const article = document.querySelector(".cart__item");
+            */
+          
+            
+            const article = document.createElement(`article`);
+            article.setAttribute(`data-id`,productCart.id);
+            article.setAttribute(`data-color`,productCart.color);
+            const displayarticle = document.querySelector(`.cart__item`)
+            displayarticle.append(article);
 
 
             const image = document.createElement(`img`);
@@ -66,6 +71,9 @@ for (let productCart of cart) {
             price.append(pricetext);
             displayp.appendChild(price);
 
+
+            const inputtype = document.querySelector(`.itemQuantity`);
+
             const quantity = document.createElement(`p`);
             const quantityClass = document.createAttribute(`class`);
             quantityClass.value = `quantity`;
@@ -75,33 +83,59 @@ for (let productCart of cart) {
             displayp.append(quantity);
             console.log(quantity);
 
+            const totalQuantity = document.getElementById(`totalQuantity`);
+            const totalPrice = document.getElementById(`totalPrice`);
 
+
+
+            //changer la quantité
+
+            function changeQuantity(productCart, quantity) {
+
+                let cart = getCart();
+                let foundProductCart = cart.find(p => p.id == productCart.id);
+                if (foundProductCart != undefined) {
+                    foundProductCart.quantity += quantity;
+                    //ne pas prendre de quantité négatives
+                    if (foundProductCart.quantity <= 0) {
+                        removeFromCart(foundProduct);
+                    } else {
+                        saveCart(cart);
+                    }
+                }
+                saveCart(cart);
+            }
+
+
+            //retirer un objet affiché dans le panier
             const displayd = document.querySelector(`.cart__item__content__settings__delete`);
             const deleteItem = document.createElement(`p`);
-            const deleteItemClass =document.createAttribute(`class`);
+            const deleteItemClass = document.createAttribute(`class`);
             deleteItemClass.value = `deleteItem`;
             const deleteItemtext = "delete";
             deleteItem.append(deleteItemtext);
             displayd.append(deleteItem);
 
-            function removeFromCart(productCart) {
-                for (let i = 0; i < deleteItem.lenght; i++)
-               
-                  deleteItem[i].addEventListener("click", function () {
-                        function removeFromCart(productCart) {
-                            cart = getCart();
-                            cart = cart.filter(p => p.id != productCart.id);
-                            saveCart(cart);
-                            console.log(deleteItem)
-                        }
-
-
-                    });
-
+         /*   function removeFromCart(productCart) {
+              let  cart = getCart();
+                cart = cart.filter(p => p.id != productCart.id);
+                saveCart(cart);
 
             }
-         
-                
+*/  const dileteItems = function () {
+                for (let i = 0; i < deleteItem.clientHeight; i++) {
+                    deleteItem[i].addEventListener("click", function () {
+                        cart = getCart();
+
+                    })
+                }
+
+            }
+
+
+
+
+        }
 
 
 
@@ -112,6 +146,7 @@ for (let productCart of cart) {
 
 
 
-        }));
 
+
+        ))
 }
