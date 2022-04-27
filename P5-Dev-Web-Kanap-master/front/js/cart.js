@@ -12,38 +12,12 @@ for (let productCart of cart) {
     fetch(url).then((response) =>
         response.json().then((productObj) => {
             console.log(productObj);
-
-
-
-
-            /*      const cartItem = document.createElement(`div`);
-                   const cartItemContent = document.createElement(`div`);
-                   const cartItemImage = document.createElement(`div`);
-                   const cartItemContentDescription = document.createElement(`div`);
-                   const cartItemContentSettings = document.createElement(`div`);
-                   const cartItemContentSettingsQuantity = document.createElement(`div`);
-                   const cartItemContentSettingsDelete = document.createElement(`div`);
-                   cartItem.appendChild(cartItemContent);
-                   cartItem.appendChild(cartItemImage);
-                   cartItemImage.append(cartItemContent);
-                   cartItemContent.appendChild(cartItemContentDescription);
-                   cartItemContent.appendChild(cartItemContentSettings);
-                   cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
-                   cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
-       
-            */
-            const cart = []
-            cart.sort(Array)
-            console.log(cart)
-
-
-            const article = document.createElement(`article`);
-            article.setAttribute(`data-id`, productCart.id);
-            article.setAttribute(`data-color`, productCart.color);
-            const displayarticle = document.querySelector(`.cart__item`)
-            displayarticle.append(article);
-
-
+            let article = document.createElement("article");
+            document.querySelector("#cart__items").appendChild(article);
+            article.className = "cart__item";
+            article.setAttribute('data-id',localStorage[productCart]);
+        
+        console.log(productCart)
             const image = document.createElement(`img`);
             image.setAttribute(`src`, productObj.imageUrl);
             image.setAttribute(`alt`, productObj.altTxt);
@@ -62,7 +36,6 @@ for (let productCart of cart) {
 
             const titletext = productObj.name;
             title.append(titletext);
-            console.log(title)
             displayp.appendChild(title);
             displayp.appendChild(color)
             const price = document.createElement(`p`);
@@ -74,21 +47,18 @@ for (let productCart of cart) {
             price.append(pricetext);
             displayp.appendChild(price);
 
-
+            const cartItemContentSettingsQuantity = document.createElement(`div`);
             const inputtype = document.querySelector(`.itemQuantity`);
-
+            
             const quantity = document.createElement(`p`);
             const quantityClass = document.createAttribute(`class`);
             quantityClass.value = `quantity`;
             const quantitytext = "Qte :";
+            cartItemContentSettingsQuantity.append(inputtype);
             quantity.append(quantitytext);
             quantity.append(productQuantity);
             displayp.append(quantity);
             console.log(quantity);
-
-            const totalQuantity = document.getElementById(`totalQuantity`);
-            const totalPrice = document.getElementById(`totalPrice`);
-
 
 
             //changer la quantité
@@ -108,9 +78,7 @@ for (let productCart of cart) {
                 }
                 saveCart(cart);
             }
-
-
-            //retirer un objet affiché dans le panier
+            //supprimer un objet affiché dans le panier
             const displayd = document.querySelector(`.cart__item__content__settings__delete`);
             const deleteItem = document.createElement(`p`);
             const deleteItemClass = document.createAttribute(`class`);
@@ -119,13 +87,14 @@ for (let productCart of cart) {
             deleteItem.append(deleteItemtext);
             displayd.append(deleteItem);
 
-         /*   function removeFromCart(productCart) {
-              let  cart = getCart();
+            function removeFromCart(productCart) {
+                let cart = getCart();
                 cart = cart.filter(p => p.id != productCart.id);
                 saveCart(cart);
-
+console.log(removeFromCart)
             }
-*/  const dileteItems = function () {
+
+            const dileteItems = function () {
                 for (let i = 0; i < deleteItem.clientHeight; i++) {
                     deleteItem[i].addEventListener("click", function () {
                         cart = getCart();
@@ -134,6 +103,19 @@ for (let productCart of cart) {
                 }
 
             }
+            /* Affiche le prix total et la quantité de produit dans le panier
+                      */
+            const totalQuantity = document.getElementById(`totalQuantity`);
+            const totalPrice = document.getElementById(`totalPrice`);
+
+
+            
+            
+
+
+
+
+
 
 
 
@@ -153,3 +135,28 @@ for (let productCart of cart) {
 
         ))
 }
+ /*      const cartItem = document.createElement(`div`);
+              const cartItemContent = document.createElement(`div`);
+              const cartItemImage = document.createElement(`div`);
+              const cartItemContentDescription = document.createElement(`div`);
+              const cartItemContentSettings = document.createElement(`div`);
+              const cartItemContentSettingsQuantity = document.createElement(`div`);
+              const cartItemContentSettingsDelete = document.createElement(`div`);
+              cartItem.appendChild(cartItemContent);
+              cartItem.appendChild(cartItemImage);
+              cartItemImage.append(cartItemContent);
+              cartItemContent.appendChild(cartItemContentDescription);
+              cartItemContent.appendChild(cartItemContentSettings);
+              cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
+              cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
+  
+       */
+/*  const cart = []
+   cart.sort(Array)
+   console.log(cart)
+
+   const article = document.createElement(`article`);
+   article.setAttribute(`data-id`, productCart.id);
+   article.setAttribute(`data-color`, productCart.color);
+   const displayarticle = document.querySelector(`.cart__item`)
+   displayarticle.append(article);*/

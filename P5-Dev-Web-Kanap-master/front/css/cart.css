@@ -53,10 +53,12 @@ h2 {
 	border-radius: 20px;
 	border: 1px solid #767676;
 	text-align: center;
-	text-align-last: center;
+	
 }
 .cart__item__content__settings input:focus {
 	outline: none;
+
+	
 }
 .cart__item__content__settings__quantity {
 	display: flex;
@@ -64,6 +66,7 @@ h2 {
 .cart__item__content__settings__quantity p {
 	margin-right: 10px;
 	display: flex;
+	
 }
 .cart__item__content__settings__delete p {
 	display: inline;
