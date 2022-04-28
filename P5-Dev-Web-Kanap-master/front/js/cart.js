@@ -4,40 +4,52 @@ let cart = JSON.parse(localStorage.getItem("cart"));
 
 
 for (let productCart of cart) {
+
     const id = productCart.id;
+    console.log(id)
     const productColor = productCart.color;
+    console.log(productColor)
     const productQuantity = productCart.quantity;
+    console.log(productQuantity)
     const url = `http://localhost:3000/api/products/${id}`
 
     fetch(url).then((response) =>
         response.json().then((productObj) => {
-            console.log(productObj);
-            let article = document.createElement("article");
-            document.querySelector("#cart__items").appendChild(article);
-            article.className = "cart__item";
-            article.setAttribute('data-id',localStorage[productCart]);
-        
-        console.log(productCart)
-            const image = document.createElement(`img`);
-            image.setAttribute(`src`, productObj.imageUrl);
-            image.setAttribute(`alt`, productObj.altTxt);
-            const displayimg = document.querySelector(".cart__item__img");
-            displayimg.appendChild(image);
+            console.log(productObj)
+            const article = document.createElement("article");
+            document.querySelector("#cart__items").append(article);
 
-            const displayp = document.querySelector(`.cart__item__content__description`);
+            article.className = `cart__item`;
+            article.setAttribute('data-id', id);
+            article.setAttribute('data_color', id);
+            const article_div = article.appendChild(document.createElement(`div`));
+            article_div.setAttribute(`class`, `cart__item__img`);
+           
             const title = document.createElement(`h2`);
             const titleClass = document.createAttribute(`class`);
             titleClass.value = `name`;
+            const titletext = productObj.name;
+            title.append(titletext);
+            article_div.appendChild(title);
+            const image = document.createElement(`img`);
+            image.setAttribute(`src`, productObj.imageUrl);
+            image.setAttribute(`alt`, productObj.altTxt);
+
+            // const displayimg = document.querySelector(`.cart__item__img`);
+            article_div.appendChild(image)
+          
+           
+            
+     
             const color = document.createElement(`p`);
             const colorClass = document.createAttribute(`class`);
             colorClass.value = `colors`;
             color.append(productColor);
-            console.log(color)
+            article_div.append(color); 
+         
 
-            const titletext = productObj.name;
-            title.append(titletext);
-            displayp.appendChild(title);
-            displayp.appendChild(color)
+           
+       
             const price = document.createElement(`p`);
             const priceClass = document.createAttribute(`class`);
             priceClass.value = `price`;
@@ -45,11 +57,12 @@ for (let productCart of cart) {
             const pricetext = "  €";
             price.append(productPrice);
             price.append(pricetext);
-            displayp.appendChild(price);
+            article_div.append(price); 
+     
 
             const cartItemContentSettingsQuantity = document.createElement(`div`);
             const inputtype = document.querySelector(`.itemQuantity`);
-            
+
             const quantity = document.createElement(`p`);
             const quantityClass = document.createAttribute(`class`);
             quantityClass.value = `quantity`;
@@ -57,8 +70,9 @@ for (let productCart of cart) {
             cartItemContentSettingsQuantity.append(inputtype);
             quantity.append(quantitytext);
             quantity.append(productQuantity);
-            displayp.append(quantity);
-            console.log(quantity);
+            article_div.append(quantity);
+    
+
 
 
             //changer la quantité
@@ -86,12 +100,13 @@ for (let productCart of cart) {
             const deleteItemtext = "delete";
             deleteItem.append(deleteItemtext);
             displayd.append(deleteItem);
+            article_div.append(deleteItem);
 
             function removeFromCart(productCart) {
                 let cart = getCart();
                 cart = cart.filter(p => p.id != productCart.id);
                 saveCart(cart);
-console.log(removeFromCart)
+                console.log(removeFromCart)
             }
 
             const dileteItems = function () {
@@ -109,8 +124,8 @@ console.log(removeFromCart)
             const totalPrice = document.getElementById(`totalPrice`);
 
 
-            
-            
+
+
 
 
 
@@ -136,21 +151,21 @@ console.log(removeFromCart)
         ))
 }
  /*      const cartItem = document.createElement(`div`);
-              const cartItemContent = document.createElement(`div`);
-              const cartItemImage = document.createElement(`div`);
-              const cartItemContentDescription = document.createElement(`div`);
-              const cartItemContentSettings = document.createElement(`div`);
-              const cartItemContentSettingsQuantity = document.createElement(`div`);
-              const cartItemContentSettingsDelete = document.createElement(`div`);
-              cartItem.appendChild(cartItemContent);
-              cartItem.appendChild(cartItemImage);
-              cartItemImage.append(cartItemContent);
-              cartItemContent.appendChild(cartItemContentDescription);
-              cartItemContent.appendChild(cartItemContentSettings);
-              cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
-              cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
-  
-       */
+       const cartItemContent = document.createElement(`div`);
+       const cartItemImage = document.createElement(`div`);
+       const cartItemContentDescription = document.createElement(`div`);
+       const cartItemContentSettings = document.createElement(`div`);
+       const cartItemContentSettingsQuantity = document.createElement(`div`);
+       const cartItemContentSettingsDelete = document.createElement(`div`);
+       cartItem.appendChild(cartItemContent);
+       cartItem.appendChild(cartItemImage);
+       cartItemImage.append(cartItemContent);
+       cartItemContent.appendChild(cartItemContentDescription);
+       cartItemContent.appendChild(cartItemContentSettings);
+       cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
+       cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
+ 
+*/
 /*  const cart = []
    cart.sort(Array)
    console.log(cart)
