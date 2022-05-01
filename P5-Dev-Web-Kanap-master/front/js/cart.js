@@ -85,7 +85,7 @@ for (let productCart of cart) {
             const item_content_settings_delete_div = item_content_settings_div.appendChild(document.createElement(`div`));
             item_content_settings_delete_div.setAttribute(`class`, `cart__item__content__settings__delete`);
             item_content_settings_delete_div.append(deleteProduct);
-            p = document.querySelectorAll(`.deleteItem`);
+         //  p = document.querySelectorAll(`.deleteItem`);
 
             //supprimer un objet affiché dans le panier
 
@@ -96,7 +96,7 @@ for (let productCart of cart) {
             for (let j = 0; j < deleteItem.length; j++) {
                 deleteItem[j].addEventListener("click", (event) => {
                     event.preventDefault();
-
+                    event.stopPropagation();
                     alert(" supprimer le produit");
                     console.log(event)
                     //selection de l'id qui sera supprimé en cliquant sur supprimer
