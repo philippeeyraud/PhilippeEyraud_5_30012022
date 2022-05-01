@@ -96,16 +96,17 @@ for (let productCart of cart) {
             for (let j = 0; j < deleteItem.length; j++) {
                 deleteItem[j].addEventListener("click", (event) => {
                     event.preventDefault();
-                   
+
                     alert(" supprimer le produit");
                     console.log(event)
                     //selection de l'id qui sera supprimé en cliquant sur supprimer
-               let id_supprimer = cart[j].id;
-               console.log(id_supprimer)
-                    //methode filter
-
-
-
+                    let id_supprimer = cart[j].id;
+                    console.log(id_supprimer)
+                    //methode filter supprimer l objet
+                    cart = cart.filter(el => el.id != id_supprimer);
+                    console.log(cart);
+//envoyer la variable dans le localstorage, transformer en Json et envoyer dans la key cart du localstorage.
+localStorage.setItem("cart",JSON.stringify(cart));
 
                 }
 
