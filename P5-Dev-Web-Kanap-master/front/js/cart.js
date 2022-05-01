@@ -87,86 +87,102 @@ for (let productCart of cart) {
             item_content_settings_delete_div.append(deleteProduct);
             p = document.querySelectorAll(`.deleteItem`);
 
-
             //supprimer un objet affiché dans le panier
-            function removeFromCart(productCart) {
-                for (let i = 0; i < p.length; i++) {
-                    p[i].addEventListener("click", (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        alert(" supprimer le produit");
 
-                        let cart = getCart()
-                        cart = cart.filter(p => p.id != productCart.id);
-                        saveCart(cart);
-                    })    
-                   
-                   
-                   
-                    
-                }    
-            
+            let deleteItem = document.querySelectorAll(".deleteItem");
+            console.log(deleteItem)
+
+            //selection des elements qui peuvent etre supprimés
+            for (let i = 0; i <deleteItem.length; i++) {
+                deleteItem[i].addEventListener("click", (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    alert(" supprimer le produit");
+console.log(event)
+//selection de l'id qui sera supprimé en cliquant sur supprimer
+const id_a_supprimer = productObj[i].id;
+console.log(id_a_supprimer)
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+                    /*   function removeFromCart(productObjet) {
+                           let cart = getCart()
+                           cart = cart.filter(p => p.id != (product.id));
+                           saveCart(cart);
+                           console.log(productObj)
+                       }
+                       */
+
+
+                    /*for (let i = 0; i < p.length; i++) {
+                        p[i].addEventListener("click", (event) => {
+                             event.preventDefault();
+                            event.stopPropagation();
+                            alert(" supprimer le produit");
         
-
-
-            }
-
-            /* const deleteItems = function () {
-                 for (let i = 0; i < deleteItemtext.length; i++) {
-                     deleteItemtext[i].addEventListener("click", function () {
-                         cart = getCart();
- 
-                     })
-                 }
- 
-             }
- 
- 
-             //    const cartItemContentSettingsQuantity = document.createElement(`div`);
-             // const inputtype = document.querySelector(`.itemQuantity`);
- 
-             //changer la quantité
- 
-             /*   function changeQuantity(productCart, quantity) {
-                    
-                    let cart = getCart();
-                    let foundProductCart = cart.find(p => p.id == productCart.id);
-                    if (foundProductCart != undefined) {
-                        foundProductCart.quantity += quantity;
-                        //ne pas prendre de quantité négatives
-                        if (foundProductCart.quantity <= 0) {
-                            removeFromCart(foundProduct);
-                        } else {
-                            saveCart(cart);
-                        }
-                    }
-                    saveCart(cart);
-                }
-              
-               
-    
-           /*     function removeFromCart(productCart) {
-                    let cart = getCart();
-                    cart = cart.filter(p => p.id != productCart.id);
-                    saveCart(cart);
-                    console.log(removeFromCart)
-                }
-    
-                const dileteItems = function () {
-                    for (let i = 0; i < deleteItem.; i++) {
-                        deleteItem[i].addEventListener("click", function () {
-                            cart = getCart();
-    
+        
                         })
                     }
-    
-                }
-                /* Affiche le prix total et la quantité de produit dans le panier
-                        
-                const totalQuantity = document.getElementById(`totalQuantity`);
-                const totalPrice = document.getElementById(`totalPrice`);
-    
-    */
+         */
+
+                    //    const cartItemContentSettingsQuantity = document.createElement(`div`);
+                    // const inputtype = document.querySelector(`.itemQuantity`);
+
+                    //changer la quantité
+
+                    /*   function changeQuantity(productCart, quantity) {
+                           
+                           let cart = getCart();
+                           let foundProductCart = cart.find(p => p.id == productCart.id);
+                           if (foundProductCart != undefined) {
+                               foundProductCart.quantity += quantity;
+                               //ne pas prendre de quantité négatives
+                               if (foundProductCart.quantity <= 0) {
+                                   removeFromCart(foundProduct);
+                               } else {
+                                   saveCart(cart);
+                               }
+                           }
+                           saveCart(cart);
+                       }
+                     
+                      
+           
+                  /*     function removeFromCart(productCart) {
+                           let cart = getCart();
+                           cart = cart.filter(p => p.id != productCart.id);
+                           saveCart(cart);
+                           console.log(removeFromCart)
+                       }
+           
+                       const dileteItems = function () {
+                           for (let i = 0; i < deleteItem.; i++) {
+                               deleteItem[i].addEventListener("click", function () {
+                                   cart = getCart();
+           
+                               })
+                           }
+           
+                       }
+                       /* Affiche le prix total et la quantité de produit dans le panier
+                               
+                       const totalQuantity = document.getElementById(`totalQuantity`);
+                       const totalPrice = document.getElementById(`totalPrice`);
+           
+           */
 
 
 
@@ -192,6 +208,8 @@ for (let productCart of cart) {
 
 
 
+                )
+            }
         }))
 }
  /*      const cartItem = document.createElement(`div`);
