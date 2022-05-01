@@ -100,9 +100,8 @@ for (let productCart of cart) {
                     alert(" supprimer le produit");
 console.log(event)
 //selection de l'id qui sera supprimé en cliquant sur supprimer
-const id_a_supprimer = productObj[i].id;
+const id_a_supprimer = productObj[i].id_;
 console.log(id_a_supprimer)
-
 
 
 
