@@ -85,18 +85,17 @@ for (let productCart of cart) {
             const item_content_settings_delete_div = item_content_settings_div.appendChild(document.createElement(`div`));
             item_content_settings_delete_div.setAttribute(`class`, `cart__item__content__settings__delete`);
             item_content_settings_delete_div.append(deleteProduct);
-         //  p = document.querySelectorAll(`.deleteItem`);
+           
 
             //supprimer un objet affiché dans le panier
 
-            let deleteItem = document.querySelectorAll(".deleteItem");
-            console.log(deleteItem)
+            let deleteItems = document.querySelectorAll(`.deleteItem`);
+          console.log(deleteItems)
 
             //selection des elements qui peuvent etre supprimés
-            for (let j = 0; j < deleteItem.length; j++) {
-                deleteItem[j].addEventListener("click", (event) => {
+            for (let j = 0; j<deleteItems.length; j++) {
+                deleteItems[j].addEventListener("click", (event) => {
                     event.preventDefault();
-                    event.stopPropagation();
                     alert(" supprimer le produit");
                     console.log(event)
                     //selection de l'id qui sera supprimé en cliquant sur supprimer
@@ -105,8 +104,12 @@ for (let productCart of cart) {
                     //methode filter supprimer l objet
                     cart = cart.filter(el => el.id != id_supprimer);
                     console.log(cart);
-//envoyer la variable dans le localstorage, transformer en Json et envoyer dans la key cart du localstorage.
-localStorage.setItem("cart",JSON.stringify(cart));
+                    //envoyer la variable dans le localstorage, transformer en Json et envoyer dans la key cart du localstorage.
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    //Signaler la suppression de l objet
+                    alert("ce panier a été supprimé");
+                    window.location.href = "cart.html";
+
 
                 }
 
@@ -117,25 +120,10 @@ localStorage.setItem("cart",JSON.stringify(cart));
 
 
 
-                    /*   function removeFromCart(productObjet) {
-                           let cart = getCart()
-                           cart = cart.filter(p => p.id != (product.id));
-                           saveCart(cart);
-                           console.log(productObj)
-                       }
-                       */
 
 
-                    /*for (let i = 0; i < p.length; i++) {
-                        p[i].addEventListener("click", (event) => {
-                             event.preventDefault();
-                            event.stopPropagation();
-                            alert(" supprimer le produit");
-        
-        
-                        })
-                    }
-         */
+
+
 
                     //    const cartItemContentSettingsQuantity = document.createElement(`div`);
                     // const inputtype = document.querySelector(`.itemQuantity`);
