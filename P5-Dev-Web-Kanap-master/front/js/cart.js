@@ -93,17 +93,16 @@ for (let productCart of cart) {
             console.log(deleteItem)
 
             //selection des elements qui peuvent etre supprimés
-            for (let i = 0; i <deleteItem.length; i++) {
-                deleteItem[i].addEventListener("click", (event) => {
+            for (let j = 0; j < deleteItem.length; j++) {
+                deleteItem[j].addEventListener("click", (event) => {
                     event.preventDefault();
-                    event.stopPropagation();
+                   
                     alert(" supprimer le produit");
-console.log(event)
-//selection de l'id qui sera supprimé en cliquant sur supprimer
-const id_a_supprimer = productObj[i].id_;
-console.log(id_a_supprimer)
-
-
+                    console.log(event)
+                    //selection de l'id qui sera supprimé en cliquant sur supprimer
+               let id_supprimer = cart[j].id;
+               console.log(id_supprimer)
+                    //methode filter
 
 
 
