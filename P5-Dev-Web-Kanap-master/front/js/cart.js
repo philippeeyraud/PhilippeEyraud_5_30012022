@@ -4,13 +4,13 @@ let cart = JSON.parse(localStorage.getItem("cart"));
 
 
 for (let productCart of cart) {
-    console.log(productCart)
+
     const id = productCart.id;
 
     const productColor = productCart.color;
-    console.log(productColor)
+
     const productQuantity = productCart.quantity;
-    console.log(productQuantity)
+
     const url = `http://localhost:3000/api/products/${id}`
 
     fetch(url).then((response) =>
@@ -18,10 +18,9 @@ for (let productCart of cart) {
 
             const article = document.createElement("article");
             document.querySelector("#cart__items").append(article);
-
             article.className = `cart__item`;
             article.setAttribute('data-id', id);
-            article.setAttribute('data_color', id);
+            article.setAttribute('data-color', id);
             // création div img
             const item_img_div = article.appendChild(document.createElement(`div`));
             item_img_div.setAttribute(`class`, `cart__item__img`);
@@ -85,142 +84,92 @@ for (let productCart of cart) {
             const item_content_settings_delete_div = item_content_settings_div.appendChild(document.createElement(`div`));
             item_content_settings_delete_div.setAttribute(`class`, `cart__item__content__settings__delete`);
             item_content_settings_delete_div.append(deleteProduct);
-           
-
-            //supprimer un objet affiché dans le panier
-
-            let deleteItems = document.querySelectorAll(`.deleteItem`);
-          console.log(deleteItems)
-
-            //selection des elements qui peuvent etre supprimés
-            for (let j = 0; j<deleteItems.length; j++) {
-                deleteItems[j].addEventListener("click", (event) => {
-                    event.preventDefault();
-                    alert(" supprimer le produit");
-                    console.log(event)
-                    //selection de l'id qui sera supprimé en cliquant sur supprimer
-                    let id_supprimer = cart[j].id;
-                    console.log(id_supprimer)
-                    //methode filter supprimer l objet
-                    cart = cart.filter(el => el.id != id_supprimer);
-                    console.log(cart);
-                    //envoyer la variable dans le localstorage, transformer en Json et envoyer dans la key cart du localstorage.
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    //Signaler la suppression de l objet
-                    alert("ce panier a été supprimé");
-                    window.location.href = "cart.html";
 
 
+            //supprimer un objet affiche dans le panier
+            //selection des elements qui peuvent etre supprimes
+
+            deleteProduct.addEventListener("click", (event) => {
+                event.preventDefault()
+                alert(" supprimer le produit");
+
+                //selection de l'id qui sera supprime en cliquant sur supprimer
+                //event.target correspond au deleteproduct clique
+                var target = event.target
+                //Je vais chercher l article parent grace a closest
+                const article = target.closest(`article`);
+
+                //Récupérons l'id et la couleur
+                art_id = article.getAttribute('data-id');
+                art_color = article.getAttribute(`data-color`);
+
+                //filtrer le produit à supprimer dans le local storage 
+                function notToSuppress(product) {
+                    return (product.id != art_id && product.color != art_color);
                 }
+                cart = cart.filter(notToSuppress);
+               
+                localStorage.setItem("cart", JSON.stringify(cart));
+                // effacer l'article dans le DOM                   
+                article.remove();
 
+                //Signaler la suppression de l objet
+                alert("ce panier a été supprimé");
+                window.location.href = "cart.html";
 
-
-
-
-
-
-
-
-
-
-
-
-                    //    const cartItemContentSettingsQuantity = document.createElement(`div`);
-                    // const inputtype = document.querySelector(`.itemQuantity`);
-
-                    //changer la quantité
-
-                    /*   function changeQuantity(productCart, quantity) {
-                           
-                           let cart = getCart();
-                           let foundProductCart = cart.find(p => p.id == productCart.id);
-                           if (foundProductCart != undefined) {
-                               foundProductCart.quantity += quantity;
-                               //ne pas prendre de quantité négatives
-                               if (foundProductCart.quantity <= 0) {
-                                   removeFromCart(foundProduct);
-                               } else {
-                                   saveCart(cart);
-                               }
-                           }
-                           saveCart(cart);
-                       }
-                     
-                      
-           
-                  /*     function removeFromCart(productCart) {
-                           let cart = getCart();
-                           cart = cart.filter(p => p.id != productCart.id);
-                           saveCart(cart);
-                           console.log(removeFromCart)
-                       }
-           
-                       const dileteItems = function () {
-                           for (let i = 0; i < deleteItem.; i++) {
-                               deleteItem[i].addEventListener("click", function () {
-                                   cart = getCart();
-           
-                               })
-                           }
-           
-                       }
-                       /* Affiche le prix total et la quantité de produit dans le panier
-                               
-                       const totalQuantity = document.getElementById(`totalQuantity`);
-                       const totalPrice = document.getElementById(`totalPrice`);
-           
-           */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                )
             }
-        }))
-}
- /*      const cartItem = document.createElement(`div`);
-const cartItemContent = document.createElement(`div`);
-const cartItemImage = document.createElement(`div`);
-const cartItemContentDescription = document.createElement(`div`);
-const cartItemContentSettings = document.createElement(`div`);
-const cartItemContentSettingsQuantity = document.createElement(`div`);
-const cartItemContentSettingsDelete = document.createElement(`div`);
-cartItem.appendChild(cartItemContent);
-cartItem.appendChild(cartItemImage);
-cartItemImage.append(cartItemContent);
-cartItemContent.appendChild(cartItemContentDescription);
-cartItemContent.appendChild(cartItemContentSettings);
-cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
-cartItemContentSettings.appendChild(cartItemContentSettingsDelete);
- 
-*/
-/*  const cart = []
-   cart.sort(Array)
-   console.log(cart)
 
-   const article = document.createElement(`article`);
-   article.setAttribute(`data-id`, productCart.id);
-   article.setAttribute(`data-color`, productCart.color);
-   const displayarticle = document.querySelector(`.cart__item`)
-   displayarticle.append(article);*/
+            )
+
+        }
+            //Montant total du panier
+            //Déclaration de la variable pour mettre les prix présents dans le panier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //    const cartItemContentSettingsQuantity = document.createElement(`div`);
+            // const inputtype = document.querySelector(`.itemQuantity`);
+
+            //changer la quantité
+
+            /*   function changeQuantity(productCart, quantity) {
+                   
+                   let cart = getCart();
+                   let foundProductCart = cart.find(p => p.id == productCart.id);
+                   if (foundProductCart != undefined) {
+                       foundProductCart.quantity += quantity;
+                       //ne pas prendre de quantité négatives
+                       if (foundProductCart.quantity <= 0) {
+                           removeFromCart(foundProduct);
+                       } else {
+                           saveCart(cart);
+                       }
+                   }
+                   saveCart(cart);
+               }
+             
+              
+             
+             
+             
+              
+               /* Affiche le prix total et la quantité de produit dans le panier
+                       
+               const totalQuantity = document.getElementById(`totalQuantity`);
+                const totalPrice = document.getElementById(`totalPrice`);
+                  */
+        ))
+}       
