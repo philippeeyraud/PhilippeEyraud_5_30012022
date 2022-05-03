@@ -121,9 +121,8 @@ for (let productCart of cart) {
                
 
             })
-            input_quantity.addEventListener("click", (event) => {
-                event.preventDefault()
-                alert(" saisir la quantité");
+            input_quantity.addEventListener("change", (e) => {
+               console.log(e.target.value)
 
 
 
