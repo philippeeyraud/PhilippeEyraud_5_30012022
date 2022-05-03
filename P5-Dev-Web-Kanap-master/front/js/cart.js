@@ -108,7 +108,7 @@ for (let productCart of cart) {
                     return (product.id != art_id && product.color != art_color);
                 }
                 cart = cart.filter(notToSuppress);
-               
+
                 localStorage.setItem("cart", JSON.stringify(cart));
                 // effacer l'article dans le DOM                   
                 article.remove();
@@ -116,12 +116,40 @@ for (let productCart of cart) {
                 //Signaler la suppression de l objet
                 alert("ce panier a été supprimé");
                 window.location.href = "cart.html";
+                //récupérer la zone de saisie;
+
+               
+
+            })
+            input_quantity.addEventListener("click", (event) => {
+                event.preventDefault()
+                alert(" saisir la quantité");
+
+
+
+
 
             }
-
             )
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             //Montant total du panier
             //Déclaration de la variable pour mettre les prix présents dans le panier
 
@@ -161,7 +189,7 @@ for (let productCart of cart) {
                    saveCart(cart);
                }
              
-              
+            
              
              
              
@@ -171,5 +199,24 @@ for (let productCart of cart) {
                const totalQuantity = document.getElementById(`totalQuantity`);
                 const totalPrice = document.getElementById(`totalPrice`);
                   */
+            /* function changeQuantity(productCart, quantity) {
+                
+                 let cart = getCart();
+                 let foundProductCart = cart.find(changeQuantity);
+                 if (foundProductCart != undefined) {
+                     foundProductCart.quantity += quantity;
+                     //ne pas prendre de quantité négatives
+                     if (foundProductCart.quantity <= 0) {
+                         removeFromCart(foundProduct);
+                     } else {
+                         saveCart(cart);
+                     }
+                 }
+                 saveCart(cart);}
+             */
+
+
+
+
         ))
-}       
+}
