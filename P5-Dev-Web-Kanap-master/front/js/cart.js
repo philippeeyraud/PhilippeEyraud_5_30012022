@@ -127,9 +127,8 @@ for (let productCart of cart) {
                     alert("la quantité a été modifiée");
                     //envoyer la nouvelle quantité dans le local storage
                     localStorage.setItem("cart", JSON.stringify(cart));
-                    function change(productQuantity) {
-                        return (product.id != art_id && product.color != art_color);
-                    }
+                 
+                    
                     let productCartNewObj = {
                         id: productCart.id,
                         quantity:e.target.value,
