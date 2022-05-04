@@ -123,16 +123,26 @@ for (let productCart of cart) {
             input_quantity.addEventListener("change", (e) => {
                 const newQuantity = e.target.value;
                 console.log(newQuantity);
-            
+                alert("la quantité a été modifiée");
                 //envoyer la nouvelle quantité dans le local storage
                 localStorage.setItem("cart", JSON.stringify(cart));
 
-cart.push(newQuantity);
-       
-            }
-                
-            
+                let productCartObj = {
+                    id: productCart.id,
+                    quantity:  e.target.value,
+                    color: productColor.value
+                   
+                };
+              
+    
+                addCart(productCartObj);
 
+
+               
+
+            }
+                 
+             
             
 
 
