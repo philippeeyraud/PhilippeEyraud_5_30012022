@@ -119,118 +119,121 @@ for (let productCart of cart) {
                 //récupérer la zone de saisie;
             })
 
-            //Récupérer les valeur dans l'inputitemquantity
-            input_quantity.addEventListener("change", (e) => {
-                const newQuantity = e.target.value;
-                console.log(newQuantity);
-                alert("la quantité a été modifiée");
-                //envoyer la nouvelle quantité dans le local storage
-                localStorage.setItem("cart", JSON.stringify(cart));
-
-                let productCartObj = {
-                    id: productCart.id,
-                    quantity:  e.target.value,
-                    color: productColor.value
-                   
-                };
-              
-    
-                addCart(productCartObj);
-
-
-               
-
-            }
-                 
-             
             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //Montant total du panier
-            //Déclaration de la variable pour mettre les prix présents dans le panier
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //    const cartItemContentSettingsQuantity = document.createElement(`div`);
-            // const inputtype = document.querySelector(`.itemQuantity`);
-
-            //changer la quantité
-
-            /*   function changeQuantity(productCart, quantity) {
-                   
-                   let cart = getCart();
-                   let foundProductCart = cart.find(p => p.id == productCart.id);
-                   if (foundProductCart != undefined) {
-                       foundProductCart.quantity += quantity;
-                       //ne pas prendre de quantité négatives
-                       if (foundProductCart.quantity <= 0) {
-                           removeFromCart(foundProduct);
-                       } else {
-                           saveCart(cart);
-                       }
-                   }
-                   saveCart(cart);
-               }
-             
-            
-             
-             
-             
-              
-               /* Affiche le prix total et la quantité de produit dans le panier
+                //Récupérer les valeur dans l'inputitemquantity
+                input_quantity.addEventListener("change", (e) => {
+                    const newQuantity = e.target.value;
+                    console.log(newQuantity);
+                    alert("la quantité a été modifiée");
+                    //envoyer la nouvelle quantité dans le local storage
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    function change(productQuantity) {
+                        return (product.id != art_id && product.color != art_color);
+                    }
+                    let productCartNewObj = {
+                        id: productCart.id,
+                        quantity:e.target.value,
+                     
                        
-               const totalQuantity = document.getElementById(`totalQuantity`);
-                const totalPrice = document.getElementById(`totalPrice`);
-                  */
-            /* function changeQuantity(productCart, quantity) {
+                    };
+                  
+        
+                    addCart(productCartNewObj);
+    
+    
+                   
+    
+                }
+                     
+                 
                 
-                 let cart = getCart();
-                 let foundProductCart = cart.find(changeQuantity);
-                 if (foundProductCart != undefined) {
-                     foundProductCart.quantity += quantity;
-                     //ne pas prendre de quantité négatives
-                     if (foundProductCart.quantity <= 0) {
-                         removeFromCart(foundProduct);
-                     } else {
-                         saveCart(cart);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                //Montant total du panier
+                //Déclaration de la variable pour mettre les prix présents dans le panier
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                //    const cartItemContentSettingsQuantity = document.createElement(`div`);
+                // const inputtype = document.querySelector(`.itemQuantity`);
+    
+                //changer la quantité
+    
+                /*   function changeQuantity(productCart, quantity) {
+                       
+                       let cart = getCart();
+                       let foundProductCart = cart.find(p => p.id == productCart.id);
+                       if (foundProductCart != undefined) {
+                           foundProductCart.quantity += quantity;
+                           //ne pas prendre de quantité négatives
+                           if (foundProductCart.quantity <= 0) {
+                               removeFromCart(foundProduct);
+                           } else {
+                               saveCart(cart);
+                           }
+                       }
+                       saveCart(cart);
+                   }
+                 
+                
+                 
+                 
+                 
+                  
+                   /* Affiche le prix total et la quantité de produit dans le panier
+                           
+                   const totalQuantity = document.getElementById(`totalQuantity`);
+                    const totalPrice = document.getElementById(`totalPrice`);
+                      */
+                /* function changeQuantity(productCart, quantity) {
+                    
+                     let cart = getCart();
+                     let foundProductCart = cart.find(changeQuantity);
+                     if (foundProductCart != undefined) {
+                         foundProductCart.quantity += quantity;
+                         //ne pas prendre de quantité négatives
+                         if (foundProductCart.quantity <= 0) {
+                             removeFromCart(foundProduct);
+                         } else {
+                             saveCart(cart);
+                         }
                      }
-                 }
-                 saveCart(cart);}
-             */
-
-
-
-
-        )
-        }))
-}
+                     saveCart(cart);}
+                 */
+    
+    
+    
+    
+            )
+            }))
+    } 
