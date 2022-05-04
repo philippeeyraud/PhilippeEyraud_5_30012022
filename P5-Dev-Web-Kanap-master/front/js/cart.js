@@ -117,21 +117,25 @@ for (let productCart of cart) {
                 alert("ce panier a été supprimé");
                 window.location.href = "cart.html";
                 //récupérer la zone de saisie;
-
-               
-
             })
+
+            //Récupérer les valeur dans l'inputitemquantity
             input_quantity.addEventListener("change", (e) => {
-               console.log(e.target.value)
+                const newQuantity = e.target.value;
+                console.log(newQuantity);
+            
+                //envoyer la nouvelle quantité dans le local storage
+                localStorage.setItem("cart", JSON.stringify(cart));
 
-
-
-
-
+cart.push(newQuantity);
+       
             }
-            )
+                
+            
 
-        }
+            
+
+
 
 
 
@@ -217,5 +221,6 @@ for (let productCart of cart) {
 
 
 
-        ))
+        )
+        }))
 }
