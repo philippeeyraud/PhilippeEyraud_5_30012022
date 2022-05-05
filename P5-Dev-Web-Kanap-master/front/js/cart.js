@@ -115,124 +115,38 @@ for (let productCart of cart) {
 
                 //Signaler la suppression de l objet
                 alert("ce panier a été supprimé");
-                window.location.href = "cart.html";
+
                 //récupérer la zone de saisie;
             })
 
-            
-                //Récupérer les valeur dans l'inputitemquantity
-                input_quantity.addEventListener("change", (e) => {
-                    const newQuantity = e.target.value;
-                    console.log(newQuantity);
-                    alert("la quantité a été modifiée");
-                    //envoyer la nouvelle quantité dans le local storage
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                 
-                    
-                    let productCartNewObj = {
-                        id: productCart.id,
-                        quantity:e.target.value,
-                     
-                       
-                    };
-                  
-        
-                    addCart(productCartNewObj);
-    
-    
-                   
-    
+            //Récupérer les valeur dans l'inputitemquantity
+            input_quantity.addEventListener("change", (event) => {
+                //event.target correspond au  clique sur input.ItemQuantity
+                var target = event.target
+                const newQuantity = target.value;
+                alert("la quantité a été modifiée = " + newQuantity);
+                //Je vais chercher l article parent grace a closest
+                input_type = target.closest(`input.itemQuantity`);
+                //Récupérons l'id et la couleur
+                art_id = article.getAttribute('data-id');
+                art_color = article.getAttribute(`data-color`);
+                console.log(`art_id= ${art_id} - art_color =${art_color}`);
+                // parcours du cart et changement de la valeur
+                for (let product of cart) {
+                    console.log(`product ${product.id}`);
+                    if (product.id == art_id && product.color == art_color) {
+                        product.quantity = newQuantity;
+                    }
                 }
-                     
+                console.log(cart);
+                //envoyer la nouvelle quantité dans le local storage
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+            
                  
-                
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                //Montant total du panier
-                //Déclaration de la variable pour mettre les prix présents dans le panier
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                //    const cartItemContentSettingsQuantity = document.createElement(`div`);
-                // const inputtype = document.querySelector(`.itemQuantity`);
-    
-                //changer la quantité
-    
-                /*   function changeQuantity(productCart, quantity) {
-                       
-                       let cart = getCart();
-                       let foundProductCart = cart.find(p => p.id == productCart.id);
-                       if (foundProductCart != undefined) {
-                           foundProductCart.quantity += quantity;
-                           //ne pas prendre de quantité négatives
-                           if (foundProductCart.quantity <= 0) {
-                               removeFromCart(foundProduct);
-                           } else {
-                               saveCart(cart);
-                           }
-                       }
-                       saveCart(cart);
-                   }
-                 
-                
-                 
-                 
-                 
-                  
-                   /* Affiche le prix total et la quantité de produit dans le panier
-                           
-                   const totalQuantity = document.getElementById(`totalQuantity`);
-                    const totalPrice = document.getElementById(`totalPrice`);
-                      */
-                /* function changeQuantity(productCart, quantity) {
-                    
-                     let cart = getCart();
-                     let foundProductCart = cart.find(changeQuantity);
-                     if (foundProductCart != undefined) {
-                         foundProductCart.quantity += quantity;
-                         //ne pas prendre de quantité négatives
-                         if (foundProductCart.quantity <= 0) {
-                             removeFromCart(foundProduct);
-                         } else {
-                             saveCart(cart);
-                         }
-                     }
-                     saveCart(cart);}
-                 */
-    
-    
-    
-    
-            )
-            }))
-    } 
+        
+
+        })}))
+            
+
+}
