@@ -1,8 +1,24 @@
 
 //Récupérer les données du localstorage
 let cart = JSON.parse(localStorage.getItem("cart"));
+//calculer la quantité de produit dans le panier
+function getTotalProduct() {
+    let number = 0;
+    let price = 0;
+    //Affiche le prix total et la quantité de produit dans le panier
 
+    const totalQuantity = document.getElementById(`totalQuantity`);
+    const totalPrice = document.getElementById(`totalPrice`);
 
+    for (let product of cart) {
+        number += product.quantity;
+
+    }
+   alert(number) ;
+}
+
+//appel calcul total lors d e l affichage
+getTotalProduct();
 for (let productCart of cart) {
 
     const id = productCart.id;
@@ -20,7 +36,7 @@ for (let productCart of cart) {
             document.querySelector("#cart__items").append(article);
             article.className = `cart__item`;
             article.setAttribute('data-id', id);
-            article.setAttribute('data-color', id);
+            article.setAttribute('data-color',productColor);
             // création div img
             const item_img_div = article.appendChild(document.createElement(`div`));
             item_img_div.setAttribute(`class`, `cart__item__img`);
@@ -117,6 +133,7 @@ for (let productCart of cart) {
                 alert("ce panier a été supprimé");
 
                 //récupérer la zone de saisie;
+                getTotalProduct();
             })
 
             //Récupérer les valeur dans l'inputitemquantity
@@ -125,7 +142,7 @@ for (let productCart of cart) {
                 var target = event.target
                 const newQuantity = target.value;
                 alert("la quantité a été modifiée = " + newQuantity);
-                //Je vais chercher l article parent grace a closest
+                //Je vais chercher l'input parent grace a closest
                 input_type = target.closest(`input.itemQuantity`);
                 //Récupérons l'id et la couleur
                 art_id = article.getAttribute('data-id');
@@ -141,12 +158,15 @@ for (let productCart of cart) {
                 console.log(cart);
                 //envoyer la nouvelle quantité dans le local storage
                 localStorage.setItem("cart", JSON.stringify(cart));
+                getTotalProduct();
 
-            
-                 
-        
 
-        })}))
-            
+
+
+
+
+            })
+        }))
+
 
 }
