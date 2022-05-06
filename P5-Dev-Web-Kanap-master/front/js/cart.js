@@ -5,20 +5,29 @@ let cart = JSON.parse(localStorage.getItem("cart"));
 function getTotalProduct() {
     let number = 0;
     let price = 0;
+
     //Affiche le prix total et la quantité de produit dans le panier
 
     const totalQuantity = document.getElementById(`totalQuantity`);
     const totalPrice = document.getElementById(`totalPrice`);
 
     for (let product of cart) {
-        number += product.quantity;
+       number += product.quantity;
+       price += product.price;
+        
+        console.log(number);
 
     }
-   alert(number) ;
+
+    alert(number);
+
 }
+
 
 //appel calcul total lors d e l affichage
 getTotalProduct();
+
+
 for (let productCart of cart) {
 
     const id = productCart.id;
@@ -36,7 +45,7 @@ for (let productCart of cart) {
             document.querySelector("#cart__items").append(article);
             article.className = `cart__item`;
             article.setAttribute('data-id', id);
-            article.setAttribute('data-color',productColor);
+            article.setAttribute('data-color', productColor);
             // création div img
             const item_img_div = article.appendChild(document.createElement(`div`));
             item_img_div.setAttribute(`class`, `cart__item__img`);
