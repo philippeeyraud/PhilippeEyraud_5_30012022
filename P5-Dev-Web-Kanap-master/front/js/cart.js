@@ -6,21 +6,31 @@ function getTotalProduct() {
     let number = 0;
     let price = 0;
 
+
     //Affiche le prix total et la quantité de produit dans le panier
 
-    const totalQuantity = document.getElementById(`totalQuantity`);
-    const totalPrice = document.getElementById(`totalPrice`);
+    const cartPriceDiv = document.createElement(`div`);
+    cartPriceDiv.setAttribute(`class`, `cart__price`);
+    const totalArticle = document.createElement(`p`);
+    const totalQuantity = document.createElement(`span`);
+    totalQuantity.setAttribute(`id`, `totalQuantity`);
+    const totalPrice = document.createElement(`span`);
+    totalPrice.setAttribute(`id`, `totalPrice`);
+    totalArticle.appendChild(totalQuantity);
+    totalArticle.appendChild(totalPrice);
+    totalQuantity.append(totalPrice);
+
+
 
     for (let product of cart) {
-       number += product.quantity;
-       price += product.price;
-        
-        console.log(number);
-
+        number += parseInt(product.quantity);
+        price += product.price;
+        console.log(price)
+        console.log(number)
     }
 
     alert(number);
-
+    alert(price);
 }
 
 
@@ -35,7 +45,8 @@ for (let productCart of cart) {
     const productColor = productCart.color;
 
     const productQuantity = productCart.quantity;
-
+    const productPrice = productCart.price;
+    console.log(productCart)
     const url = `http://localhost:3000/api/products/${id}`
 
     fetch(url).then((response) =>
@@ -56,6 +67,7 @@ for (let productCart of cart) {
 
             const item_content_div = article.appendChild(document.createElement(`div`));
             item_content_div.setAttribute(`class`, `cart__item__content`);
+
             const item_content_desc_div = item_content_div.appendChild(document.createElement(`div`));
             item_content_desc_div.setAttribute(`class`, `cart__item__content__description`);
 
@@ -78,6 +90,7 @@ for (let productCart of cart) {
             priceClass.value = `price`;
             const productPrice = productObj.price;
             const pricetext = "  €";
+
             price.append(productPrice);
             price.append(pricetext);
             item_content_desc_div.append(price);

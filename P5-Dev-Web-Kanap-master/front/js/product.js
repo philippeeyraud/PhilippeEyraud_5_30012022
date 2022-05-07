@@ -13,7 +13,7 @@ let url = `http://localhost:3000/api/products/${productId}`;
 
 fetch(url).then((response) =>
     response.json().then((product) => {
-        console.log(product);
+        
         document.getElementById(`title`).textContent = product.name;
         document.getElementById(`price`).textContent = product.price;
         document.getElementById(`description`).textContent = product.description;
@@ -21,7 +21,8 @@ fetch(url).then((response) =>
         image.setAttribute(`src`, product.imageUrl);
         image.setAttribute(`alt`, product.altTxt);
         const productColor = document.getElementById(`colors`)
-
+        const productPrice = document.getElementById(`price`)
+  
         for (let i = 0; i < product.colors.length; i += 1) {
             const option = document.createElement(`option`);
             option.innerText = product.colors[i];
@@ -53,7 +54,7 @@ fetch(url).then((response) =>
                 return;
             }
 
-            
+
             else {
                 (productId);
             }
@@ -79,14 +80,15 @@ fetch(url).then((response) =>
 
                 //on récupère l'Id et la couleur
 
-                let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color);
+                let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color && p.price == productCart.price);
+               
                 if (foundProduct != undefined) {
                     //Gérer une quantité, si le produit existe  on lui ajoute une quantité sous forme de nombre.
                     //parseInt analyse une chaine de caractères et renvoie un nombre.
                     let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
                     //la quantité est recalculé à chaque ajout de produit
                     foundProduct.quantity = newQuantity;
-
+                   
                 } else {
 
                     cart.push(productCart);
@@ -99,7 +101,9 @@ fetch(url).then((response) =>
             let productCartObj = {
                 id: productId,
                 quantity: quantityElement.value,
-                color: productColor.value
+                color: productColor.value,
+              
+
             };
 
             addCart(productCartObj);
