@@ -21,7 +21,7 @@ fetch(url).then((response) =>
         image.setAttribute(`src`, product.imageUrl);
         image.setAttribute(`alt`, product.altTxt);
         const productColor = document.getElementById(`colors`)
-        const productPrice = document.getElementById(`price`)
+ 
   
         for (let i = 0; i < product.colors.length; i += 1) {
             const option = document.createElement(`option`);

@@ -24,8 +24,8 @@ function getTotalProduct() {
 
     for (let product of cart) {
         number += parseInt(product.quantity);
-        price += product.price;
-        console.log(price)
+       price += parseInt(product.totalPrice) ;
+  
         console.log(number)
     }
 
@@ -90,6 +90,7 @@ for (let productCart of cart) {
             priceClass.value = `price`;
             const productPrice = productObj.price;
             const pricetext = "  €";
+            console.log(price)
 
             price.append(productPrice);
             price.append(pricetext);
