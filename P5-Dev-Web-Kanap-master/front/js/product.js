@@ -80,7 +80,7 @@ fetch(url).then((response) =>
 
                 //on récupère l'Id et la couleur
 
-                let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color && p.price == productCart.price);
+                let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color );
                
                 if (foundProduct != undefined) {
                     //Gérer une quantité, si le produit existe  on lui ajoute une quantité sous forme de nombre.
@@ -102,7 +102,7 @@ fetch(url).then((response) =>
                 id: productId,
                 quantity: quantityElement.value,
                 color: productColor.value,
-              
+      
 
             };
 

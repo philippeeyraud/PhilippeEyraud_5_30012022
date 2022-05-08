@@ -3,6 +3,7 @@
 let cart = JSON.parse(localStorage.getItem("cart"));
 //calculer la quantité de produit dans le panier
 function getTotalProduct() {
+    
     let number = 0;
     let price = 0;
 
@@ -19,18 +20,21 @@ function getTotalProduct() {
     totalArticle.appendChild(totalQuantity);
     totalArticle.appendChild(totalPrice);
     totalQuantity.append(totalPrice);
-
+  
 
 
     for (let product of cart) {
         number += parseInt(product.quantity);
-       price += parseInt(product.totalPrice) ;
-  
+
+        price += parseInt(product.price);
+
         console.log(number)
+    
     }
 
     alert(number);
     alert(price);
+ 
 }
 
 
@@ -45,12 +49,13 @@ for (let productCart of cart) {
     const productColor = productCart.color;
 
     const productQuantity = productCart.quantity;
-    const productPrice = productCart.price;
-    console.log(productCart)
+   
+
     const url = `http://localhost:3000/api/products/${id}`
 
     fetch(url).then((response) =>
         response.json().then((productObj) => {
+
 
             const article = document.createElement("article");
             document.querySelector("#cart__items").append(article);
@@ -87,10 +92,10 @@ for (let productCart of cart) {
 
             const price = document.createElement(`p`);
             const priceClass = document.createAttribute(`class`);
-            priceClass.value = `price`;
+            priceClass.value = parseInt(`price`);
             const productPrice = productObj.price;
             const pricetext = "  €";
-            console.log(price)
+           console.log(productPrice)
 
             price.append(productPrice);
             price.append(pricetext);
