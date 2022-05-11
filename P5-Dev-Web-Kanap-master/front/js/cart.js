@@ -228,13 +228,13 @@ main();
 const form = document.querySelector(`.cart__order__form`);
 
 const command = document.querySelector("order");
-//Récupérer les données du formulaire
-let email = document.querySelectorAll("input[name = 'email']");
-let lastName = document.querySelectorAll("input[name = 'lastName']");
-let firstName = document.querySelectorAll("input[name = 'firstName']");
-let adress = document.querySelectorAll("input[name = 'adress']");
-let city = document.querySelectorAll("input[name = 'adress']");
-console.log(input);
+//Récupérer les données du formulaire creéer une node list
+let email = document.querySelector('#email');
+let lastName = document.querySelector('lastName');
+let firstName = document.querySelector('firstName');
+let adress = document.querySelector('adress');
+let city = document.querySelector('city');
+console.log(input.city);
 
 
 
