@@ -234,7 +234,7 @@ let lastName = document.querySelector('lastName');
 let firstName = document.querySelector('firstName');
 let adress = document.querySelector('adress');
 let city = document.querySelector('city');
-console.log(input.city);
+
 
 
 
