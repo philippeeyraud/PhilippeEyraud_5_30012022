@@ -235,6 +235,7 @@ let firstName = document.querySelector('#firstName');
 let adress = document.querySelector('#adress');
 let city = document.querySelector('#city');
 
+    
 
 
 
@@ -260,12 +261,12 @@ const validEmail = function (inputEmail) {
 
 
 
-   /* if (testEmail) {
-    mes.innerHTML =    "l email est correct !";
+  if (testEmail) {
+    mes=  "l email est correct !";
     }
     else {
 
-        mes.innerHTML =     "email error !"
+       mes=     "email error !"
     };
-    console.log(mes)*/
+    console.log(mes)
 }
