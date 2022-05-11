@@ -226,6 +226,18 @@ main();
 
 //Récupérer les informations du formulaire
 const form = document.querySelector(`.cart__order__form`);
+
+const command = document.querySelector("order");
+//Récupérer les données du formulaire
+let email = document.querySelectorAll("input[name = 'email']");
+let lastName = document.querySelectorAll("input[name = 'lastName']");
+let firstName = document.querySelectorAll("input[name = 'firstName']");
+let adress = document.querySelectorAll("input[name = 'adress']");
+let city = document.querySelectorAll("input[name = 'adress']");
+console.log(input);
+
+
+
 //Ecouter la modification de l Email
 form.email.addEventListener(`change`, function () {
     {
@@ -243,14 +255,17 @@ const validEmail = function (inputEmail) {
 
     let mes = document.querySelector(`#emailErrorMsg`);
 
-    console.log()
 
 
-    if (testEmail) {
-        mes.innerHTML = "l email est correct !";
+
+
+
+   /* if (testEmail) {
+    mes.innerHTML =    "l email est correct !";
     }
     else {
-        mes.innerHTML = "email error !"
+
+        mes.innerHTML =     "email error !"
     };
-    console.log(message)
+    console.log(mes)*/
 }
