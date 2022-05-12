@@ -254,8 +254,11 @@ const validEmail = function (inputEmail) {
     //Informer l'utilisateur si il a mal rempli le message
     let testEmail = emailRegExp.test(inputEmail.value);
 
-    let mes = document.querySelector(`#emailErrorMsg`);
-
+    
+   let mes = document.createElement('p')
+   mes= document.getElementById('emailErrorMsg');
+email.appendChild(mes)
+console.log(mes)
 
 
 
@@ -266,7 +269,7 @@ const validEmail = function (inputEmail) {
     }
     else {
 
-       mes=     "email error !"
+    mes=     "email error !"
     };
     console.log(mes)
 }
