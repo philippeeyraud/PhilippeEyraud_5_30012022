@@ -232,44 +232,126 @@ const command = document.querySelector("order");
 let email = document.querySelector('#email');
 let lastName = document.querySelector('#lastName');
 let firstName = document.querySelector('#firstName');
-let adress = document.querySelector('#adress');
+let address = document.querySelector('#address');
 let city = document.querySelector('#city');
-
-    
-
-
 
 //Ecouter la modification de l Email
 form.email.addEventListener(`change`, function () {
     {
         validEmail(this)
+    }
+})
+
+//Ecouter la modification de text
+form.firstName.addEventListener(`change`, function () {
+    {
+        validFirstName(this)
+
+    }
+})
+form.lastName.addEventListener(`change`, function () {
+    {
+        validLastName(this)
+
+    }
+})
+form.address.addEventListener(`change`, function () {
+    {
+        validAddress(this)
+
+    }
+})
+form.city.addEventListener(`change`, function () {
+    {
+        validCity(this)
 
     }
 })
 
+//Créer la fonction validFirstName
+const validFirstName = function (inputFirstName) {
+    // création de la REgExp pour validation FirstName
+    firstNameRegExp = new RegExp('^[a-zA-Z-]{2,15}$', 'g');
+    //Informer l'utilisateur si il a mal rempli le message
+    let testFirstName = firstNameRegExp.test(inputFirstName.value);
+    let mes = document.createElement('p');
+    mes = document.getElementById('firstNameErrorMsg');
+
+    if (testFirstName) {
+        mes.insertAdjacentHTML('beforeend', "");
+    }
+    else {
+        mes.insertAdjacentHTML('beforeend', " text error !");
+    }
+    console.log(validFirstName)
+}
+
+//Créer la fonction validLastName
+const validLastName = function (inputLastName) {
+    // création de la REgExp pour validation FirstName
+    lastNameRegExp = new RegExp('^[a-zA-Z-]{2,15}$', 'g');
+    //Informer l'utilisateur si il a mal rempli le message
+    let testLastName = lastNameRegExp.test(inputLastName.value);
+    let mes = document.createElement('p');
+    mes = document.getElementById('lastNameErrorMsg');
+    if (testLastName) {
+        mes.insertAdjacentHTML('beforeend', " ");
+    }
+    else {
+        mes.insertAdjacentHTML('beforeend', "  text error !");
+    };
+    console.log(mes)
+}
+
+
+//Créer la fonction validAddress
+const validAddress = function (inputAddress) {
+    // création de la REgExp pour validation FirstName
+    addressRegExp = new RegExp('^[a-zA-Z0-10000-]{2,15}$', 'g');
+    //Informer l'utilisateur si il a mal rempli le message
+    let testAddress = addressRegExp.test(inputAddress.value);
+    let mes = document.createElement('p');
+    mes = document.getElementById('addressErrorMsg');
+
+    if (testAddress) {
+        mes.insertAdjacentHTML('beforeend', "");
+    }
+    else {
+        mes.insertAdjacentHTML('beforeend', " text error !");
+    }
+    console.log(validAddress)
+}
+//Créer la fonction validCity
+const validCity = function (inputCity) {
+    // création de la REgExp pour validation FirstName
+    cityRegExp =  new RegExp('^[a-zA-Z-]{2,15}$', 'g');
+    //Informer l'utilisateur si il a mal rempli le message
+    let testCity = cityRegExp.test(inputCity.value);
+    let mes = document.createElement('p');
+    mes = document.getElementById('cityErrorMsg');
+    if (testCity) {
+        mes.insertAdjacentHTML('beforeend', "");
+    }
+    else {
+        mes.insertAdjacentHTML('beforeend', " text error !");
+    }
+    console.log(validCity)
+   
+}
 //Créer la fonction validEmail
 const validEmail = function (inputEmail) {
     // création de la REgExp pour validation email
-    let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@][a-zA6Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
+    let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
     //Informer l'utilisateur si il a mal rempli le message
     let testEmail = emailRegExp.test(inputEmail.value);
+    let mes = document.createElement('p')
+    mes = document.getElementById('emailErrorMsg');
 
-    
-   let mes = document.createElement('p')
-   mes= document.getElementById('emailErrorMsg');
-email.appendChild(mes)
-console.log(mes)
-
-
-
-
-
-  if (testEmail) {
-    mes=  "l email est correct !";
+    if (testEmail) {
+        mes.insertAdjacentHTML('beforeend', " ");
     }
     else {
-
-    mes=     "email error !"
+        mes.insertAdjacentHTML('beforeend', " email error !");
     };
     console.log(mes)
 }
