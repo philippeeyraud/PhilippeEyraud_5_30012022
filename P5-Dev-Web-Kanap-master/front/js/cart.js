@@ -5,11 +5,11 @@ let cart = JSON.parse(localStorage.getItem("cart"));
 //#SL
 // globale pour form valide
 const formValidation = {
-     firstName : false, 
-     lastName: false, 
-     address: false, 
-     city: false, 
-     email: false
+    firstName: false,
+    lastName: false,
+    address: false,
+    city: false,
+    email: false
 };
 
 
@@ -215,57 +215,59 @@ function eraseProduct(target) {
 }
 
 
-async function addSurfaceControl () {
-//Récupérer les informations du formulaire
-const form = document.querySelector(`.cart__order__form`);
+async function addSurfaceControl() {
+    //Récupérer les informations du formulaire
+    const form = document.querySelector(`.cart__order__form`);
 
-const command = document.querySelector("order");
-//Récupérer les données du formulaire creéer une node list
-let email = document.querySelector('#email');
-let lastName = document.querySelector('#lastName');
-let firstName = document.querySelector('#firstName');
-let address = document.querySelector('#address');
-let city = document.querySelector('#city');
+    const command = document.querySelector("order");
+    //Récupérer les données du formulaire creéer une node list
+    let email = document.querySelector('#email');
+    let lastName = document.querySelector('#lastName');
+    let firstName = document.querySelector('#firstName');
+    let address = document.querySelector('#address');
+    let city = document.querySelector('#city');
 
-//Ecouter la modification de l Email
-form.email.addEventListener(`change`, function () {
-    {
-        //EMAIL
-        formValidation.email= validateControl(this,"^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","emailErrorMsg","Email non valide");
-    }
-})
+    //Ecouter la modification de l Email
+    //ajout d'un object global "formValidation" qui contiendra la validité ou non des zones de surface
+    //cet objet est parcouru au click sur "commander"
+    form.email.addEventListener(`change`, function () {
+        {
+            //EMAIL
+            formValidation.email = validateControl(this, "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$", "emailErrorMsg", "Email non valide");
+        }
+    })
 
-//Ecouter la modification de text
-form.firstName.addEventListener(`change`, function () {
-    {
-        //FIRSTNAME
-        formValidation.firstName=validateControl(this,"^[A-Z][A-Za-z\é\è\ê\-]{2,15}$","firstNameErrorMsg","Prénom non valide");
+    //Ecouter la modification de text
+    form.firstName.addEventListener(`change`, function () {
+        {
+            //FIRSTNAME
+            formValidation.firstName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\-]{2,15}$", "firstNameErrorMsg", "Prénom non valide");
 
-    }
-})
-form.lastName.addEventListener(`change`, function () {
-    {        
-        //LASTNAME
-        formValidation.lastName=validateControl(this,"^[A-Z][A-Za-z\é\è\ê\-]{2,15}$","lastNameErrorMsg","Nom non valide" );
+        }
+    })
+    form.lastName.addEventListener(`change`, function () {
+        {
+            //LASTNAME
+            formValidation.lastName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\-]{2,15}$", "lastNameErrorMsg", "Nom non valide");
 
-    }
-})
-form.address.addEventListener(`change`, function () {
-    {
-        // ADRESSE
-        formValidation.address=validateControl(this,"^[0-9]{1,3}(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]","addressErrorMsg","Adresse non valide" );
+        }
+    })
+    form.address.addEventListener(`change`, function () {
+        {
+            // ADRESSE
+            formValidation.address = validateControl(this, "^[0-9]{1,3}(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]", "addressErrorMsg", "Adresse non valide");
 
-    }
-})
+        }
+    })
 
-// test city
-form.city.addEventListener(`change`, function () {
-    {
-        // VILLE
-        formValidation.city=validateControl(this,"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,58}$","cityErrorMsg","Ville non valide" );
-console.log(formValidation)
-    }
-})
+    // test city
+    form.city.addEventListener(`change`, function () {
+        {
+            // VILLE
+            formValidation.city = validateControl(this, "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,58}$", "cityErrorMsg", "Ville non valide");
+            console.log(formValidation)
+        }
+    })
 }
 
 const validateControl = (inputName, regexStr, elementStr, errMessage) => {
@@ -277,21 +279,21 @@ const validateControl = (inputName, regexStr, elementStr, errMessage) => {
     mes = document.getElementById(elementStr);
 
     if (testValue) {
-         //#PE
-         mes.textContent ="";
-         return true;
+
+        mes.textContent = "";
+        return true;
     }
     else {
-         //#PE
-        mes.textContent =errMessage;      
+
+        mes.textContent = errMessage;
         return false;
-    }    
+    }
 }
 
 
 //
-// envoyer la commande
-//
+// envoyer la commande vers le serveur avec la methode Post de l'objet newOrder
+
 const sendOrder = function () {
 
     let productIds = [];
@@ -299,9 +301,10 @@ const sendOrder = function () {
         productIds.push(product.id);
     }
 
-    
+    //Création de l'objet newOrder  et de la liste de ID des produits
     let newOrder =
     {
+        //Création de l'objet contact , issue des informations du formulaire       
         contact: {
             firstName: document.getElementById('firstName').value,
             lastName: document.getElementById('lastName').value,
@@ -311,7 +314,7 @@ const sendOrder = function () {
         },
         products: productIds
     };
-
+    //Envoie vers le serveur par la methode POST
     let url = 'http://localhost:3000/api/products/order';
 
     fetch(url, {
@@ -328,7 +331,7 @@ const sendOrder = function () {
             }
         })
         .then(function (value) {
-            let orderId = value.orderId;           
+            let orderId = value.orderId;
             // le panier est correctement posté
             // on redirige vers la page de confirmation
             document.location.href = 'confirmation.html?id=' + orderId;
@@ -348,28 +351,27 @@ async function main() {
         await showProducts();
         await getTotalProduct();
         addSurfaceControl();
-        //#z
-        // ajouter envoi de panier 
         
+        // ajouter envoi de panier 
+
         document.querySelector('#order').addEventListener('click', function (event) {
-            event.preventDefault();            
+            event.preventDefault();
             // test de surface
             // ici on va chercher toutes les valeurs de "formvalidation"
-            let checklist=Object.values(formValidation);
+            let checklist = Object.values(formValidation);
             console.table(checklist);
 
             let result = true;
             //ici on parcours les valeurs de "formvalidation", puis on teste si toutes les valeurs sont "true"            
             for (check of checklist) {
-                if (check == false) result=false;
+                if (check == false) result = false;
             }
-            
+
             // toutes les valeurs sont "true", on peut envoyer le panier
-            if (result) {            
-                   sendOrder();
+            if (result) {
+                sendOrder();
             }
-            else
-            {
+            else {
                 alert("Merci de remplir les champs correctement");
             }
         });

@@ -1,3 +1,6 @@
+
+//Aller chercher, l'ID passe en parametre.
+
 const id = new URL(window.location.href).searchParams.get('id');
 console.log(id);
 
