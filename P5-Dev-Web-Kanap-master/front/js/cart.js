@@ -1,6 +1,16 @@
+
 //Récupérer les données du localstorage
 let cart = JSON.parse(localStorage.getItem("cart"));
 
+//#SL
+// globale pour form valide
+const formValidation = {
+     firstName : false, 
+     lastName: false, 
+     address: false, 
+     city: false, 
+     email: false
+};
 
 
 //
@@ -205,142 +215,131 @@ function eraseProduct(target) {
 }
 
 
-const surfaceControl = function () {
+async function addSurfaceControl () {
+//Récupérer les informations du formulaire
+const form = document.querySelector(`.cart__order__form`);
 
-    //Récupérer les informations du formulaire
+const command = document.querySelector("order");
+//Récupérer les données du formulaire creéer une node list
+let email = document.querySelector('#email');
+let lastName = document.querySelector('#lastName');
+let firstName = document.querySelector('#firstName');
+let address = document.querySelector('#address');
+let city = document.querySelector('#city');
 
-
-
-    const form = document.querySelector(`.cart__order__form`);
-
-    const command = document.querySelector("order");
-    //Récupérer les données du formulaire creéer une node list
-    let email = document.querySelector('#email');
-    let lastName = document.querySelector('#lastName');
-    let firstName = document.querySelector('#firstName');
-    let address = document.querySelector('#address');
-    let city = document.querySelector('#city');
-
-    //Ecouter la modification de l Email
-    form.email.addEventListener(`change`, function () {
-        {
-            validEmail(this)
-        }
-    })
-
-    //Ecouter la modification de text
-    form.firstName.addEventListener(`change`, function () {
-        {
-            validFirstName(this)
-
-        }
-    })
-    form.lastName.addEventListener(`change`, function () {
-        {
-            validLastName(this)
-
-        }
-    })
-    form.address.addEventListener(`change`, function () {
-        {
-            validAddress(this)
-
-        }
-    })
-    form.city.addEventListener(`change`, function () {
-        {
-            validCity(this)
-
-        }
-    })
-}
-//Créer la fonction validFirstName
-const validFirstName = function (inputFirstName) {
-    // création de la REgExp pour validation FirstName
-    firstNameRegExp = new RegExp('^[a-zA-Z-]{2,15}$', 'g');
-    //Informer l'utilisateur si il a mal rempli le message
-    let testFirstName = firstNameRegExp.test(inputFirstName.value);
-    let mes = document.createElement('p');
-    mes = document.getElementById('firstNameErrorMsg');
-
-    if (testFirstName) {
-        mes.insertAdjacentHTML('beforeend', "");
+//Ecouter la modification de l Email
+form.email.addEventListener(`change`, function () {
+    {
+        //EMAIL
+        formValidation.email= validateControl(this,"^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","emailErrorMsg","Email non valide");
     }
-    else {
-        mes.insertAdjacentHTML('beforeend', " text error !");
+})
+
+//Ecouter la modification de text
+form.firstName.addEventListener(`change`, function () {
+    {
+        //FIRSTNAME
+        formValidation.firstName=validateControl(this,"^[A-Z][A-Za-z\é\è\ê\-]{2,15}$","firstNameErrorMsg","Prénom non valide");
+
     }
-    console.log(validFirstName)
+})
+form.lastName.addEventListener(`change`, function () {
+    {        
+        //LASTNAME
+        formValidation.lastName=validateControl(this,"^[A-Z][A-Za-z\é\è\ê\-]{2,15}$","lastNameErrorMsg","Nom non valide" );
+
+    }
+})
+form.address.addEventListener(`change`, function () {
+    {
+        // ADRESSE
+        formValidation.address=validateControl(this,"^[0-9]{1,3}(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]","addressErrorMsg","Adresse non valide" );
+
+    }
+})
+
+// test city
+form.city.addEventListener(`change`, function () {
+    {
+        // VILLE
+        formValidation.city=validateControl(this,"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,58}$","cityErrorMsg","Ville non valide" );
+console.log(formValidation)
+    }
+})
 }
 
-//Créer la fonction validLastName
-const validLastName = function (inputLastName) {
-    // création de la REgExp pour validation FirstName
-    lastNameRegExp = new RegExp('^[a-zA-Z-]{2,15}$', 'g');
+const validateControl = (inputName, regexStr, elementStr, errMessage) => {
+    // création de la REgExp pour validation 
+    regExp = new RegExp(regexStr);
     //Informer l'utilisateur si il a mal rempli le message
-    let testLastName = lastNameRegExp.test(inputLastName.value);
+    let testValue = regExp.test(inputName.value);
     let mes = document.createElement('p');
-    mes = document.getElementById('lastNameErrorMsg');
-    if (testLastName) {
-        mes.insertAdjacentHTML('beforeend', " ");
+    mes = document.getElementById(elementStr);
+
+    if (testValue) {
+         //#PE
+         mes.textContent ="";
+         return true;
     }
     else {
-        mes.insertAdjacentHTML('beforeend', "  text error !");
+         //#PE
+        mes.textContent =errMessage;      
+        return false;
+    }    
+}
+
+
+//
+// envoyer la commande
+//
+const sendOrder = function () {
+
+    let productIds = [];
+    for (let product of cart) {
+        productIds.push(product.id);
+    }
+
+    
+    let newOrder =
+    {
+        contact: {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            email: document.getElementById('email').value
+        },
+        products: productIds
     };
-    console.log(mes)
+
+    let url = 'http://localhost:3000/api/products/order';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newOrder)
+    })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(function (value) {
+            let orderId = value.orderId;           
+            // le panier est correctement posté
+            // on redirige vers la page de confirmation
+            document.location.href = 'confirmation.html?id=' + orderId;
+
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
 }
 
 
-//Créer la fonction validAddress
-const validAddress = function (inputAddress) {
-    // création de la REgExp pour validation FirstName
-    addressRegExp = new RegExp('^[a-zA-Z0-10000-,]{2,15}$', 'g');
-    //Informer l'utilisateur si il a mal rempli le message
-    let testAddress = addressRegExp.test(inputAddress.value);
-    let mes = document.createElement('p');
-    mes = document.getElementById('addressErrorMsg');
-
-    if (testAddress) {
-        mes.insertAdjacentHTML('beforeend', "");
-    }
-    else {
-        mes.insertAdjacentHTML('beforeend', " text error !");
-    }
-    console.log(validAddress)
-}
-//Créer la fonction validCity
-const validCity = function (inputCity) {
-    // création de la REgExp pour validation FirstName
-    cityRegExp = new RegExp('^[a-zA-Z-.,]{2,15}$', 'g');
-    //Informer l'utilisateur si il a mal rempli le message
-    let testCity = cityRegExp.test(inputCity.value);
-
-    let mes = document.getElementById('cityErrorMsg');
-    if (testCity) {
-        mes.insertAdjacentHTML('beforeend', "");
-    }
-    else {
-        mes.insertAdjacentHTML('beforeend', " text error !");
-    }
-    console.log(validCity)
-
-}
-//Créer la fonction validEmail
-const validEmail = function (inputEmail) {
-    // création de la REgExp pour validation email
-    let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
-    //Informer l'utilisateur si il a mal rempli le message
-    let testEmail = emailRegExp.test(inputEmail.value);
-
-    let mes = document.getElementById('emailErrorMsg');
-
-    if (testEmail) {
-        mes.insertAdjacentHTML('beforeend', " ");
-    }
-    else {
-        mes.insertAdjacentHTML('beforeend', " email error !");
-    };
-    console.log(mes)
-}
 /* MAIN */
 async function main() {
     try {
@@ -348,7 +347,33 @@ async function main() {
 
         await showProducts();
         await getTotalProduct();
-        await surfaceControl();
+        addSurfaceControl();
+        //#z
+        // ajouter envoi de panier 
+        
+        document.querySelector('#order').addEventListener('click', function (event) {
+            event.preventDefault();            
+            // test de surface
+            // ici on va chercher toutes les valeurs de "formvalidation"
+            let checklist=Object.values(formValidation);
+            console.table(checklist);
+
+            let result = true;
+            //ici on parcours les valeurs de "formvalidation", puis on teste si toutes les valeurs sont "true"            
+            for (check of checklist) {
+                if (check == false) result=false;
+            }
+            
+            // toutes les valeurs sont "true", on peut envoyer le panier
+            if (result) {            
+                   sendOrder();
+            }
+            else
+            {
+                alert("Merci de remplir les champs correctement");
+            }
+        });
+
     }
     catch (err) {
         console.log(err);
@@ -356,7 +381,6 @@ async function main() {
     finally {
         console.log('finally')
     }
-
 }
 
 main();

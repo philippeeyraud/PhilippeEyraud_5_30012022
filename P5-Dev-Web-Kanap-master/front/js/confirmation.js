@@ -1,44 +1,15 @@
-function sendForminfo() {
-    let productIds = [];
-    for (let product of cart) {
-        productIds.push(product.id);
-    }
-    let newOrder =  
-    {
-        contact: {
-            firstName : document.getElementById('firstName').value, 
-            lastName: document.getElementById('lastName').value, 
-            address: document.getElementById('address').value, 
-            city: document.getElementById('city').value, 
-            email: document.getElementById('email').value
-        },
-        products: productIds
-    };
+const id = new URL(window.location.href).searchParams.get('id');
+console.log(id);
 
-    let url = 'http://localhost:3000/api/products/order';   
-     
-    fetch(url, {    
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newOrder) 
-    })
-    .then(function (response) {
-        if (response.ok) {        
-            return response.json();
-        }
-    }) 
-    .then(function (value) {  
-        let orderId = value.orderId;
-        let form = document.querySelector('form');
-        form.setAttribute('method', 'post');
-        form.setAttribute('action', 'confirmation.html?orderId=' + orderId)
-        form.submit();      
-        localStorage.clear();   
-    })
-    .catch(function (err) {
-        console.log(err)
-    });   
+const orderId = document.getElementById('orderId');
+let p = document.querySelector('p')
+
+if (id ==='undefined') {
+        p.innerText = 'Erreur lors de la commande'; 
+        setTimeout('window.location="cart.html"',6000)
+        
+}else{
+        orderId.innerText = id;
+        p.innerText = 'Votre commande est valide'; 
+        localStorage.clear();
 }
