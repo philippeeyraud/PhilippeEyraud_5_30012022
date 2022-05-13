@@ -205,69 +205,55 @@ function eraseProduct(target) {
 }
 
 
-/* MAIN */
-async function main() {
-    try {
-        console.log("MAIN");
+const surfaceControl = function () {
 
-        await showProducts();
-        await getTotalProduct();
+    //Récupérer les informations du formulaire
 
-    }
-    catch (err) {
-        console.log(err);
-    }
-    finally {
-        console.log('finally')
-    }
+
+
+    const form = document.querySelector(`.cart__order__form`);
+
+    const command = document.querySelector("order");
+    //Récupérer les données du formulaire creéer une node list
+    let email = document.querySelector('#email');
+    let lastName = document.querySelector('#lastName');
+    let firstName = document.querySelector('#firstName');
+    let address = document.querySelector('#address');
+    let city = document.querySelector('#city');
+
+    //Ecouter la modification de l Email
+    form.email.addEventListener(`change`, function () {
+        {
+            validEmail(this)
+        }
+    })
+
+    //Ecouter la modification de text
+    form.firstName.addEventListener(`change`, function () {
+        {
+            validFirstName(this)
+
+        }
+    })
+    form.lastName.addEventListener(`change`, function () {
+        {
+            validLastName(this)
+
+        }
+    })
+    form.address.addEventListener(`change`, function () {
+        {
+            validAddress(this)
+
+        }
+    })
+    form.city.addEventListener(`change`, function () {
+        {
+            validCity(this)
+
+        }
+    })
 }
-
-main();
-
-//Récupérer les informations du formulaire
-const form = document.querySelector(`.cart__order__form`);
-
-const command = document.querySelector("order");
-//Récupérer les données du formulaire creéer une node list
-let email = document.querySelector('#email');
-let lastName = document.querySelector('#lastName');
-let firstName = document.querySelector('#firstName');
-let address = document.querySelector('#address');
-let city = document.querySelector('#city');
-
-//Ecouter la modification de l Email
-form.email.addEventListener(`change`, function () {
-    {
-        validEmail(this)
-    }
-})
-
-//Ecouter la modification de text
-form.firstName.addEventListener(`change`, function () {
-    {
-        validFirstName(this)
-
-    }
-})
-form.lastName.addEventListener(`change`, function () {
-    {
-        validLastName(this)
-
-    }
-})
-form.address.addEventListener(`change`, function () {
-    {
-        validAddress(this)
-
-    }
-})
-form.city.addEventListener(`change`, function () {
-    {
-        validCity(this)
-
-    }
-})
-
 //Créer la fonction validFirstName
 const validFirstName = function (inputFirstName) {
     // création de la REgExp pour validation FirstName
@@ -307,7 +293,7 @@ const validLastName = function (inputLastName) {
 //Créer la fonction validAddress
 const validAddress = function (inputAddress) {
     // création de la REgExp pour validation FirstName
-    addressRegExp = new RegExp('^[a-zA-Z0-10000-]{2,15}$', 'g');
+    addressRegExp = new RegExp('^[a-zA-Z0-10000-,]{2,15}$', 'g');
     //Informer l'utilisateur si il a mal rempli le message
     let testAddress = addressRegExp.test(inputAddress.value);
     let mes = document.createElement('p');
@@ -324,11 +310,11 @@ const validAddress = function (inputAddress) {
 //Créer la fonction validCity
 const validCity = function (inputCity) {
     // création de la REgExp pour validation FirstName
-    cityRegExp =  new RegExp('^[a-zA-Z-]{2,15}$', 'g');
+    cityRegExp = new RegExp('^[a-zA-Z-.,]{2,15}$', 'g');
     //Informer l'utilisateur si il a mal rempli le message
     let testCity = cityRegExp.test(inputCity.value);
-    let mes = document.createElement('p');
-    mes = document.getElementById('cityErrorMsg');
+
+    let mes = document.getElementById('cityErrorMsg');
     if (testCity) {
         mes.insertAdjacentHTML('beforeend', "");
     }
@@ -336,7 +322,7 @@ const validCity = function (inputCity) {
         mes.insertAdjacentHTML('beforeend', " text error !");
     }
     console.log(validCity)
-   
+
 }
 //Créer la fonction validEmail
 const validEmail = function (inputEmail) {
@@ -344,8 +330,8 @@ const validEmail = function (inputEmail) {
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
     //Informer l'utilisateur si il a mal rempli le message
     let testEmail = emailRegExp.test(inputEmail.value);
-    let mes = document.createElement('p')
-    mes = document.getElementById('emailErrorMsg');
+
+    let mes = document.getElementById('emailErrorMsg');
 
     if (testEmail) {
         mes.insertAdjacentHTML('beforeend', " ");
@@ -355,3 +341,22 @@ const validEmail = function (inputEmail) {
     };
     console.log(mes)
 }
+/* MAIN */
+async function main() {
+    try {
+        console.log("MAIN");
+
+        await showProducts();
+        await getTotalProduct();
+        await surfaceControl();
+    }
+    catch (err) {
+        console.log(err);
+    }
+    finally {
+        console.log('finally')
+    }
+
+}
+
+main();
