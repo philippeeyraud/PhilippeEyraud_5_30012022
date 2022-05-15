@@ -214,7 +214,7 @@ function eraseProduct(target) {
 
 
 async function addSurfaceControl() {
-   //Récupérer les données du formulaire creéer une node list
+
     const form = document.querySelector(`.cart__order__form`);
 
     //ajout d'un object global "formValidation" qui contiendra la validité ou non des zones de surface
@@ -223,9 +223,11 @@ async function addSurfaceControl() {
         {
             //EMAIL
             formValidation.email = validateControl(this, "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$", "emailErrorMsg", "Email non valide");
+  
         }
+       
     })
-
+    console.log(formValidation)
     //Ecouter la modification de text
     form.firstName.addEventListener(`change`, function () {
         {
@@ -266,7 +268,7 @@ const validateControl = (inputName, regexStr, elementStr, errMessage) => {
     let testValue = regExp.test(inputName.value);
     let mes = document.createElement('p');
     mes = document.getElementById(elementStr);
-
+console.log(testValue)
     if (testValue) {
 
         mes.textContent = "";
@@ -302,7 +304,10 @@ const sendOrder = function () {
             email: document.getElementById('email').value
         },
         products: productIds
+     
+   
     };
+   
     //Envoie vers le serveur par la methode POST
     let url = 'http://localhost:3000/api/products/order';
 
@@ -343,7 +348,7 @@ async function main() {
         addSurfaceControl();
 
         // ajouter envoi de panier 
-
+        
         document.querySelector('#order').addEventListener('click', function (event) {
             event.preventDefault();
             // test de surface
@@ -356,7 +361,7 @@ async function main() {
             for (check of checklist) {
                 if (check == false) result = false;
             }
-
+            
             // toutes les valeurs sont "true", on peut envoyer le panier
             if (result) {
                 sendOrder();
@@ -364,8 +369,9 @@ async function main() {
             else {
                 alert("Merci de remplir les champs correctement");
             }
+          console.log(checkList)
         });
-
+ 
     }
     catch (err) {
         console.log(err);
