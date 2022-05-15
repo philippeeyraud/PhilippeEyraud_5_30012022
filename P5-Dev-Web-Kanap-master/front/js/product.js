@@ -9,7 +9,7 @@ let url = `http://localhost:3000/api/products/${productId}`;
 
 
 
-
+//faire les requêtes vers l'API 
 
 fetch(url).then((response) =>
     response.json().then((product) => {
@@ -20,9 +20,8 @@ fetch(url).then((response) =>
         const image = document.createElement(`img`);
         image.setAttribute(`src`, product.imageUrl);
         image.setAttribute(`alt`, product.altTxt);
+        console.log(image)
         const productColor = document.getElementById(`colors`)
-
-
         for (let i = 0; i < product.colors.length; i += 1) {
             const option = document.createElement(`option`);
             option.innerText = product.colors[i];
@@ -64,7 +63,7 @@ fetch(url).then((response) =>
             }
 
             //Récuperer les données du panier dans le local storage
-
+            //Création du panierà partir de cette fonction
             function getCart() {
                 let cart = localStorage.getItem("cart");
                 if (cart == null) {
@@ -72,22 +71,21 @@ fetch(url).then((response) =>
                 }
                 else {
                     return JSON.parse(cart);
-                }
+                }  
             }
-            //  ajout au panier et c'est ce produit(productCart)que je veux ajouter au panier
+            //  ajout au panier , c'est ce produit(productCart)que je veux ajouter au panier
             function addCart(productCart) {
-                let cart = getCart();
-
+                let cart = getCart();   
                 //on récupère l'Id et la couleur
 
                 let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color);
 
                 if (foundProduct != undefined) {
                     //Gérer une quantité, si le produit existe  on lui ajoute une quantité sous forme de nombre.
-                    //parseInt analyse une chaine de caractères et renvoie un nombre.
-                    let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
+                    //parseInt analyse une chaine de caractères et renvoie un nombre.  
                     //la quantité est recalculé à chaque ajout de produit
-                    foundProduct.quantity = newQuantity;
+                    let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
+                     foundProduct.quantity = newQuantity;
 
                 } else {
 
@@ -96,7 +94,7 @@ fetch(url).then((response) =>
 
                 saveCart(cart);
             }
-            //objet product Cart qui permet de recupérer les éléments suivant, pour pouvoir les envoyer sur le localstorage.
+            //product Cart objet  qui permet de recupérer les éléments suivant, pour pouvoir les envoyer sur le localstorage.
 
             let productCartObj = {
                 id: productId,

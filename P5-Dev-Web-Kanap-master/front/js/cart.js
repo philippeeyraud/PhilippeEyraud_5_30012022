@@ -1,9 +1,10 @@
 
-//Récupérer les données du localstorage
+//Récupérer sous forme d'objet les données du localstorage
 let cart = JSON.parse(localStorage.getItem("cart"));
 
-//#SL
-// globale pour form valide
+
+
+// globale pour formValidation
 const formValidation = {
     firstName: false,
     lastName: false,
@@ -13,9 +14,9 @@ const formValidation = {
 };
 
 
-//
+
 // Retourne les données d'un produit depuis le back end
-//
+
 async function getProductObjFromBack(productId) {
     const url = `http://localhost:3000/api/products/${productId}`
 
@@ -27,20 +28,17 @@ async function getProductObjFromBack(productId) {
 
 
     });
+
 }
 
-//
+
 // Calcule le prix global
-//
+
 async function getTotalProduct() {
 
     let totalQuantity = 0;
     let totalPrice = 0;
-
-
     //Affiche le prix total et la quantité de produit dans le panier
-
-
     //    console.log(cart);    
     for (let product of cart) {
         productObj = await getProductObjFromBack(product.id);
@@ -65,12 +63,12 @@ async function showProducts() {
 
         productObj = await getProductObjFromBack(productCart.id);
 
+        // création des variables et des nodes pour l'affichage des elts du dom
         const article = document.createElement("article");
         document.querySelector("#cart__items").append(article);
         article.className = `cart__item`;
         article.setAttribute('data-id', id);
         article.setAttribute('data-color', productColor);
-        // création div img
         const item_img_div = article.appendChild(document.createElement(`div`));
         item_img_div.setAttribute(`class`, `cart__item__img`);
         const image = document.createElement(`img`);
@@ -146,7 +144,7 @@ async function showProducts() {
 
         })
 
-        //Récupérer les valeur dans l'inputitemquantity
+        //Récupérer les valeur dans l'inputitemquantity pour changer la quantité
         input_quantity.addEventListener("change", (event) => {
             changeQuantity(event.target);
         })
@@ -154,9 +152,9 @@ async function showProducts() {
 
 }
 
-//
+
 // changement de quantité
-//
+
 function changeQuantity(target) {
     //event.target correspond au  clique sur input.ItemQuantity
 
@@ -216,18 +214,9 @@ function eraseProduct(target) {
 
 
 async function addSurfaceControl() {
-    //Récupérer les informations du formulaire
+   //Récupérer les données du formulaire creéer une node list
     const form = document.querySelector(`.cart__order__form`);
 
-    const command = document.querySelector("order");
-    //Récupérer les données du formulaire creéer une node list
-    let email = document.querySelector('#email');
-    let lastName = document.querySelector('#lastName');
-    let firstName = document.querySelector('#firstName');
-    let address = document.querySelector('#address');
-    let city = document.querySelector('#city');
-
-    //Ecouter la modification de l Email
     //ajout d'un object global "formValidation" qui contiendra la validité ou non des zones de surface
     //cet objet est parcouru au click sur "commander"
     form.email.addEventListener(`change`, function () {
@@ -291,7 +280,7 @@ const validateControl = (inputName, regexStr, elementStr, errMessage) => {
 }
 
 
-//
+
 // envoyer la commande vers le serveur avec la methode Post de l'objet newOrder
 
 const sendOrder = function () {
@@ -340,8 +329,9 @@ const sendOrder = function () {
         .catch(function (err) {
             console.log(err)
         });
-}
 
+}
+//On appele les fonctions dans une fonction pricipal
 
 /* MAIN */
 async function main() {
@@ -351,7 +341,7 @@ async function main() {
         await showProducts();
         await getTotalProduct();
         addSurfaceControl();
-        
+
         // ajouter envoi de panier 
 
         document.querySelector('#order').addEventListener('click', function (event) {
@@ -383,6 +373,7 @@ async function main() {
     finally {
         console.log('finally')
     }
+
 }
 
 main();
