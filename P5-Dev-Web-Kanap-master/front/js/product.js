@@ -1,7 +1,7 @@
 
 
 let productId = new URL(window.location.href).searchParams.get(`id`);
-console.log("le id =" + productId);
+
 
 
 //Pour aller chercher des requêtes vers l'API 
@@ -26,7 +26,6 @@ fetch(url).then((response) =>
             const option = document.createElement(`option`);
             option.innerText = product.colors[i];
             option.value = product.colors[i];
-            console.log(product.colors[i]);
             productColor.appendChild(option);
 
         }
@@ -54,9 +53,6 @@ fetch(url).then((response) =>
             }
 
 
-            else {
-                (productId);
-            }
             //Stocker les données dans le localstorage
             function saveCart(cart) {
                 localStorage.setItem("cart", JSON.stringify(cart));

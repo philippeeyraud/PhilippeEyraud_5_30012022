@@ -12,7 +12,7 @@ const fetchOutput = async () => {
       //traiter la promise et récupérer le tableau   
       .then((Promise) => {
          outputData = Promise
-         console.log(outputData)
+       
       }
       )
 };

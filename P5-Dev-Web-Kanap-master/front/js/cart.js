@@ -101,7 +101,7 @@ async function showProducts() {
         priceClass.value = parseInt(`price`);
         const productPrice = productObj.price;
         const pricetext = "  €";
-        console.log(productPrice)
+        
 
         price.append(productPrice);
         price.append(pricetext);
@@ -165,15 +165,15 @@ function changeQuantity(target) {
     const article = target.closest(`article`);
     const art_id = article.getAttribute('data-id');
     const art_color = article.getAttribute(`data-color`);
-    console.log(`art_id= ${art_id} - art_color =${art_color}`);
+  
     // parcours du cart et changement de la valeur
     for (let product of cart) {
-        // console.log(`product ${product.id}`);
+    
         if (product.id == art_id && product.color == art_color) {
             product.quantity = newQuantity;
         }
     }
-    //console.log(cart);
+    
     //envoyer la nouvelle quantité dans le local storage
     localStorage.setItem("cart", JSON.stringify(cart));
     getTotalProduct();
@@ -227,14 +227,14 @@ async function addSurfaceControl() {
         }
        
     })
-    console.log(formValidation)
+   
     //Ecouter la modification de text
     form.firstName.addEventListener(`change`, function () {
-        {
+        
             //FIRSTNAME
-            formValidation.firstName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\-]{2,15}$", "firstNameErrorMsg", "Prénom non valide");
+            formValidation.firstName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\ç \s*-]{2,20}$", "firstNameErrorMsg", "Prénom non valide");
 
-        }
+        
     })
     form.lastName.addEventListener(`change`, function () {
         {
@@ -256,7 +256,7 @@ async function addSurfaceControl() {
         {
             // VILLE
             formValidation.city = validateControl(this, "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,58}$", "cityErrorMsg", "Ville non valide");
-            console.log(formValidation)
+           
         }
     })
 }
@@ -268,7 +268,7 @@ const validateControl = (inputName, regexStr, elementStr, errMessage) => {
     let testValue = regExp.test(inputName.value);
     let mes = document.createElement('p');
     mes = document.getElementById(elementStr);
-console.log(testValue)
+
     if (testValue) {
 
         mes.textContent = "";
@@ -332,7 +332,7 @@ const sendOrder = function () {
 
         })
         .catch(function (err) {
-            console.log(err)
+         
         });
 
 }
@@ -341,7 +341,7 @@ const sendOrder = function () {
 /* MAIN */
 async function main() {
     try {
-        console.log("MAIN");
+       
 
         await showProducts();
         await getTotalProduct();
@@ -369,15 +369,15 @@ async function main() {
             else {
                 alert("Merci de remplir les champs correctement");
             }
-          console.log(checkList)
+      
         });
  
     }
     catch (err) {
-        console.log(err);
+      
     }
     finally {
-        console.log('finally')
+       
     }
 
 }

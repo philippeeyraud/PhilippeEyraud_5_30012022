@@ -1,15 +1,10 @@
 
 //Aller chercher, l'ID passe en parametre.
-
+let p = document.querySelector('p');
+let span = document.querySelector('span');
 const id = new URL(window.location.href).searchParams.get('id');
-console.log(id);
-
 const orderId = document.getElementById('orderId');
 
-
-
-let p = document.querySelector('p')
-let span = document.querySelector('span')
 if (id === 'undefined') {
         p.innerText = 'Erreur lors de la commande';
         setTimeout('window.location="cart.html"', 6000)
@@ -17,12 +12,12 @@ if (id === 'undefined') {
 } else {
         orderId.innerText = id;
         p.innerText = 'Commande validée !';
-       
+
         p.append(span)
- 
 
-        };
 
-        localStorage.clear();
+};
+
+localStorage.clear();
 
 
