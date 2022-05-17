@@ -2,8 +2,13 @@
 //Récupérer sous forme d'objet les données du localstorage
 let cart = JSON.parse(localStorage.getItem("cart"));
 
+let mess = document.querySelector('h1');
+if(cart===null || cart.length == 0){
+    mess.textContent = 'Veuillez selectionner un produit';
 
+}
 
+ 
 // globale pour formValidation
 const formValidation = {
     firstName: false,
@@ -60,9 +65,9 @@ async function showProducts() {
         const id = productCart.id;
         const productColor = productCart.color;
         const productQuantity = productCart.quantity;
-
         productObj = await getProductObjFromBack(productCart.id);
 
+       
         // création des variables et des nodes pour l'affichage des elts du dom
         const article = document.createElement("article");
         document.querySelector("#cart__items").append(article);
@@ -101,7 +106,7 @@ async function showProducts() {
         priceClass.value = parseInt(`price`);
         const productPrice = productObj.price;
         const pricetext = "  €";
-        
+
 
         price.append(productPrice);
         price.append(pricetext);
@@ -165,15 +170,15 @@ function changeQuantity(target) {
     const article = target.closest(`article`);
     const art_id = article.getAttribute('data-id');
     const art_color = article.getAttribute(`data-color`);
-  
+
     // parcours du cart et changement de la valeur
     for (let product of cart) {
-    
+
         if (product.id == art_id && product.color == art_color) {
             product.quantity = newQuantity;
         }
     }
-    
+
     //envoyer la nouvelle quantité dans le local storage
     localStorage.setItem("cart", JSON.stringify(cart));
     getTotalProduct();
@@ -223,18 +228,18 @@ async function addSurfaceControl() {
         {
             //EMAIL
             formValidation.email = validateControl(this, "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$", "emailErrorMsg", "Email non valide");
-  
+
         }
-       
+
     })
-   
+
     //Ecouter la modification de text
     form.firstName.addEventListener(`change`, function () {
-        
-            //FIRSTNAME
-            formValidation.firstName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\ç \s*-]{2,20}$", "firstNameErrorMsg", "Prénom non valide");
 
-        
+        //FIRSTNAME
+        formValidation.firstName = validateControl(this, "^[A-Z][A-Za-z\é\è\ê\ç \s*-]{2,20}$", "firstNameErrorMsg", "Prénom non valide");
+
+
     })
     form.lastName.addEventListener(`change`, function () {
         {
@@ -256,7 +261,7 @@ async function addSurfaceControl() {
         {
             // VILLE
             formValidation.city = validateControl(this, "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,58}$", "cityErrorMsg", "Ville non valide");
-           
+
         }
     })
 }
@@ -304,10 +309,10 @@ const sendOrder = function () {
             email: document.getElementById('email').value
         },
         products: productIds
-     
-   
+
+
     };
-   
+
     //Envoie vers le serveur par la methode POST
     let url = 'http://localhost:3000/api/products/order';
 
@@ -332,7 +337,7 @@ const sendOrder = function () {
 
         })
         .catch(function (err) {
-         
+
         });
 
 }
@@ -341,14 +346,14 @@ const sendOrder = function () {
 /* MAIN */
 async function main() {
     try {
-       
+
 
         await showProducts();
         await getTotalProduct();
         addSurfaceControl();
 
         // ajouter envoi de panier 
-        
+
         document.querySelector('#order').addEventListener('click', function (event) {
             event.preventDefault();
             // test de surface
@@ -361,7 +366,7 @@ async function main() {
             for (check of checklist) {
                 if (check == false) result = false;
             }
-            
+
             // toutes les valeurs sont "true", on peut envoyer le panier
             if (result) {
                 sendOrder();
@@ -369,15 +374,15 @@ async function main() {
             else {
                 alert("Merci de remplir les champs correctement");
             }
-      
+
         });
- 
+
     }
     catch (err) {
-      
+
     }
     finally {
-       
+
     }
 
 }

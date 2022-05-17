@@ -56,6 +56,7 @@ fetch(url).then((response) =>
             //Stocker les données dans le localstorage
             function saveCart(cart) {
                 localStorage.setItem("cart", JSON.stringify(cart));
+
             }
 
             //Récuperer les données du panier dans le local storage
@@ -63,15 +64,16 @@ fetch(url).then((response) =>
             function getCart() {
                 let cart = localStorage.getItem("cart");
                 if (cart == null) {
+                  
                     return [];
                 }
                 else {
                     return JSON.parse(cart);
-                }  
+                }
             }
             //  ajout au panier , c'est ce produit(productCart)que je veux ajouter au panier
             function addCart(productCart) {
-                let cart = getCart();   
+                let cart = getCart();
                 //on récupère l'Id et la couleur
 
                 let foundProduct = cart.find(p => p.id == productCart.id && p.color == productCart.color);
@@ -81,7 +83,7 @@ fetch(url).then((response) =>
                     //parseInt analyse une chaine de caractères et renvoie un nombre.  
                     //la quantité est recalculé à chaque ajout de produit
                     let newQuantity = parseInt(foundProduct.quantity) + parseInt(productCart.quantity);
-                     foundProduct.quantity = newQuantity;
+                    foundProduct.quantity = newQuantity;
 
                 } else {
 
