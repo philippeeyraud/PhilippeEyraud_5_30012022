@@ -20,7 +20,7 @@ fetch(url).then((response) =>
         const image = document.createElement(`img`);
         image.setAttribute(`src`, product.imageUrl);
         image.setAttribute(`alt`, product.altTxt);
-        console.log(image)
+      
         const productColor = document.getElementById(`colors`)
         for (let i = 0; i < product.colors.length; i += 1) {
             const option = document.createElement(`option`);
@@ -59,7 +59,7 @@ fetch(url).then((response) =>
 
             }
 
-            //Récuperer les données du panier dans le local storage
+           //Récuperer les données du panier dans le local storage
             //Création du panierà partir de cette fonction
             function getCart() {
                 let cart = localStorage.getItem("cart");
@@ -70,8 +70,9 @@ fetch(url).then((response) =>
                 else {
                     return JSON.parse(cart);
                 }
-            }
-            //  ajout au panier , c'est ce produit(productCart)que je veux ajouter au panier
+                }
+               
+         //  ajout au panier , c'est ce produit(productCart)que je veux ajouter au panier
             function addCart(productCart) {
                 let cart = getCart();
                 //on récupère l'Id et la couleur
@@ -101,9 +102,8 @@ fetch(url).then((response) =>
 
 
             };
-
             addCart(productCartObj);
-
+    
         });
 
 
